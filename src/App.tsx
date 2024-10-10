@@ -32,7 +32,7 @@ function App() {
   console.log(data, "data");
   return (
     <div className="App">
-      <main className="bg-darkGray text-white grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
+      <main className="bg-gray-dark text-white grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
         <Header />
         <Routes >
           <Route path="/" element={<HomePage />} />

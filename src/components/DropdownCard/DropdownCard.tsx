@@ -25,7 +25,7 @@ interface IDropdownCard {
 const DropdownCard:React.FC<IDropdownCard> = ({ title, icon, iconColor, categories, handleDropdownClick, open }) => {
   const Icon = icons[icon];
   return( 
-    <div className="rounded-lg px-3 pt-3 border border-transparentGray4 text-black overflow-hidden">
+    <div className="rounded-lg px-3 pt-3 border border-gray-40 text-black-default overflow-hidden">
       <div className="flex items-center pt-[6px] pb-4 border-b border-transparentGray">
         <Icon 
           className="w-5 h-5 mr-4 ml-1"

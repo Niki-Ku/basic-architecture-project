@@ -17,7 +17,7 @@ const Header = () => {
   document.body.classList.add(`${open && 'scroll-lock'}`);
 
   return (
-    <header className="md:flex md:justify-between z-20 md:items-center bg-black text-center p-6 fixed top-0 left-0 w-full relative">
+    <header className="md:flex md:justify-between z-20 md:items-center bg-black-default text-center p-6 fixed top-0 left-0 w-full relative">
       <div className="max-w-max">
         <Link to="/">
           <img src={NetflixLogo} alt="Netflix Logo" />

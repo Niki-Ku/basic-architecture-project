@@ -4,16 +4,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        gray: 'rgb(115, 115, 115)',
-        darkGray: 'rgb(24, 24, 24)',
-        red: 'rgb(229, 9, 20)',
-        graySecondary: 'rgb(76, 73, 72)',
-        transparentGray: '#80808033',
-        transparentGray4: 'rgba(128, 128, 128, .4)',
-        transparentGray2: 'rgba(128, 128, 128, .2)',
-        transparentBlack1: 'rgba(0, 0, 0, .1)',
-        transparentBlack7: 'rgba(0, 0, 0, .7)',
-        transparentBlack9: 'rgba(0, 0, 0, .9)',
+        red : {
+          default: 'rgb(229, 9, 20)',
+        },
+        gray : {
+          default: 'rgb(115, 115, 115)',
+          dark: 'rgb(24, 24, 24)',
+          secondary: 'rgb(76, 73, 72)',
+          white: 'rgb(250, 250, 250)',
+          20: 'rgba(128, 128, 128, .2)',
+          40: 'rgba(128, 128, 128, .4)',
+        },
+        black : {
+          default: 'black',
+          10: 'rgba(0, 0, 0, .1)',
+          70: 'rgba(0, 0, 0, .7)',
+          90: 'rgba(0, 0, 0, .9)',
+        },
       },
     },
   },

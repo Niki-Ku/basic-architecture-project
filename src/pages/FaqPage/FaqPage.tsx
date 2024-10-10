@@ -37,32 +37,32 @@ const FaqPage = () => {
 
 
   return(
-    <div className="bg-white text-black">
+    <div className="bg-white text-black-default">
       <div className="min-h-[360px]">
         <section className="flex flex-col justify-center" style={{minHeight: 'calc(100svh - 70px)'}}>
           <div className="px-3 py-12 grow flex items-center">
             <div className="w-full max-w-[600px] m-auto">
               <h1 ref={heading} className="font-extrabold text-[40px] mb-6 text-center">How can we help?</h1>
               <div className={`h-[46px] mb-6`} style={headingIsVisible ? {height: 'auto'} : {height: '46px'}}>
-                <div className={`${headingIsVisible ? '' : 'fixed bg-white z-10 w-full left-0 top-0 h-[80px] py-auto border-b border-transparentGray2 flex justify-center items-center'}`} >
+                <div className={`${headingIsVisible ? '' : 'fixed bg-white z-10 w-full left-0 top-0 h-[80px] py-auto border-b border-gray-20 flex justify-center items-center'}`} >
                   <div className={`${headingIsVisible ? '' : 'w-full max-w-[600px]'}`} >
                     <SearchBar links={footerLinks} />
                   </div>
                 </div>
               </div>
-              <div className="text-center text-transparentBlack7">
+              <div className="text-center text-black-70">
                 <p className="inline font-bold">Popular topics: </p>
                 <div className="inline">
                   {popularTopicsLinks.map(topic => (
                     <div key={topic.title} className="inline font-medium after:content-[',']">
-                      <Link to={topic.link} className="underline hover:text-transparentBlack9">{topic.title}</Link>
+                      <Link to={topic.link} className="underline hover:text-black-90">{topic.title}</Link>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
           </div>
-          <div className="mx-auto w-6/12 text-black relative justify-self-end text-center">
+          <div className="mx-auto w-6/12 text-black-default relative justify-self-end text-center">
             <button 
               onClick={() => {exploreTopics.current?.scrollIntoView({behavior: 'smooth'})}} 
               className='arrow-parent pb-10 inline-block hover:underline' 
@@ -88,14 +88,14 @@ const FaqPage = () => {
           ))}
         </div>
         <div className=" max-w-[600px] m-auto">
-          <h3 className="text-lg font-bold border-b border-transparentGray4 pb-2">Quick Links</h3>
+          <h3 className="text-lg font-bold border-b border-gray-40 pb-2">Quick Links</h3>
           <ul>
             {quickLinks.map((item, index) => {
               const Icon = quickLinksIcons[item.icon] 
               return (
-                <li key={index} className="flex gap-4 items-center py-3 border-b border-transparentGray4 last:border-0" >
+                <li key={index} className="flex gap-4 items-center py-3 border-b border-gray-40 last:border-0" >
                   <Icon className="w-4 h-4" />
-                  <Link to={item.link} className="underline font-bold hover:text-transparentBlack7">{item.title}</Link>
+                  <Link to={item.link} className="underline font-bold hover:text-black-70">{item.title}</Link>
                 </li>
               )
             })}

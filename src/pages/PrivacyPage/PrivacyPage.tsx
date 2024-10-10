@@ -123,10 +123,10 @@ useEffect(() => {
 }, [openSection, sectionObserver]);
 
   return(
-    <div className="bg-white text-black">
+    <div className="bg-white text-black-default">
       <div> back to home link and print button here </div>
       <div>
-        <div className="sideBar sticky top-[100px] max-w-[275px] w-[25%] overflow-y-auto float-left border-t-4 border-red">
+        <div className="sideBar sticky top-[100px] max-w-[275px] w-[25%] overflow-y-auto float-left border-t-4 border-red-default">
           <SidebarNavigation activeTopic={activeTopic} setActiveTopic={setActiveTopic} allSections={topicRefs.current} openSection={openSection} />
         </div>
         <div className="flex flex-col ml-auto">

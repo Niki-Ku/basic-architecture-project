@@ -43,7 +43,7 @@ const SidebarDropdown:React.FC<ISidebarDropdown> = ({ title, subLinks, id, activ
   }, [openSection, activeTopic, id])
   
   return (
-    <div className="bg-white text-black w-full">
+    <div className="bg-white text-black-default w-full">
       <details 
         open={openSection === `${id}-dropdown`}
         onClick={(e) => handleDetailsClick(e)}
@@ -56,7 +56,7 @@ const SidebarDropdown:React.FC<ISidebarDropdown> = ({ title, subLinks, id, activ
             <p>{title}</p>
             {subLinks && (
               <ArrowDownShort 
-                className={`w-6 h-6 mr-2 fill-black -rotate-90 duration-100 shrink-0`} 
+                className={`w-6 h-6 mr-2 fill-black-default -rotate-90 duration-100 shrink-0`} 
                 style={arrowStyles}
               />
             )}
