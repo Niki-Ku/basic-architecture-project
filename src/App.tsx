@@ -13,6 +13,7 @@ import FaqPage from "./pages/FaqPage/FaqPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import PrivacyPage from "./pages/PrivacyPage/PrivacyPage";
+import TermsOfUsePage from "./pages/TermsOfUsePage/TermsOfUsePage";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -41,6 +42,7 @@ function App() {
           <Route path="/user" element={<UserPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/termsofuse" element={<TermsOfUsePage />} />
         </Routes>
         <Footer />
       </main>

@@ -9,10 +9,15 @@ const HomePage = () => {
       </h1>
       <div>
         <span>Done pages:</span>
-        <Link to='/faq'>FAQ page</Link>
+        <br />
+        <Link to='/faq' className="underline">FAQ page</Link>
+        <br />
+        <Link to="/privacy" className="underline">Privacy page</Link>
+        <br />
+        <Link to="/termsofuse" className="underline">Terms of Use</Link>
+        <br />
         <br />
         <span>In process:</span>
-        <Link to="/privacy">Privacy page</Link>
       </div>
     </div>
   )
