@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { colRef } from "../..";
+import { usersColection } from "../..";    // maybe remove it in the end
 import { getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -28,7 +28,7 @@ const HomePage = () => {
 	const popularOptions = fetchMovies(1, lang, "popular");
 	const topOptions = fetchMovies(1, lang, "top_rated");
 	const genresOptions = fetchGenres(lang);
-	const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -103,7 +103,7 @@ const HomePage = () => {
 
 	const getDataFromDb = async () => {
 		// remove it later at all from here
-		const snapshot = await getDocs(colRef);
+		const snapshot = await getDocs(usersColection);
 		const data: any = []; //remove any
 		snapshot.forEach((doc) => {
 			data.push({ ...doc.data(), id: doc.id });

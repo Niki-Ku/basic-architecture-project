@@ -20,8 +20,8 @@ const queryClient = new QueryClient();
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-export const colRef = collection(db, "test");
-export {app, auth}
+const usersColection = collection(db, "users");
+export {app, auth, db, usersColection}
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement

@@ -5,6 +5,7 @@ const passwordRegex =
 
 export const registrationSchema = yup.object().shape({
   email: yup.string().email('email-error').required("required"),
+  name: yup.string().min(2, 'name-min').max(32, 'name-max').required("required"),
   password: yup.string().matches(passwordRegex, { message: 'password-error' }).required("required"),
   passwordRepeat: yup.string().oneOf([yup.ref('password'), undefined], "password-repeat-error").required("required"),
   termsAndService: yup.boolean()

@@ -193,5 +193,8 @@
   "back-to-login-page": "Povratak na stranicu za prijavu",
   "top-rated": "Najbolje ocijenjeno",
   "playing-now": "Sada se prikazuje",
-  "popular": "Popularno"
+  "popular": "Popularno",
+  "name-min": "Korisničko ime mora imati najmanje 2 znaka.",
+  "name-max": "Korisničko ime ne smije imati više od 32 znaka.",
+  "name": "Ime"
 }

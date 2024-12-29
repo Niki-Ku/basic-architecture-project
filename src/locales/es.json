@@ -193,7 +193,10 @@
   "back-to-login-page": "Volver a la página de inicio de sesión",
   "top-rated": "Mejor valoradas",
   "playing-now": "Reproduciendo ahora",
-  "popular": "Popular"
+  "popular": "Popular",
+  "name-min": "El nombre de usuario debe tener al menos 2 caracteres.",
+  "name-max": "El nombre de usuario no debe tener más de 32 caracteres.",
+  "name": "Nombre"
   
 }
 

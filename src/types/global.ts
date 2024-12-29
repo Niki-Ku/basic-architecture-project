@@ -73,3 +73,7 @@ export interface IGenre {
 	id: string;
 	name: string;
 }
+
+export interface FirebaseUser {
+	uid: string;
+}

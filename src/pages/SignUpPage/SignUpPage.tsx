@@ -8,9 +8,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { registrationSchema } from "../../schemas/yupSchemas";
 import { useAuth } from "../../context/AuthContext";
+import { addToDb } from "../../helpers/firebaseUtils";
 
 interface IRegistration {
 	email: string;
+	name: string;
 	password: string;
 	passwordRepeat: string;
 	termsAndService: boolean;
@@ -21,9 +23,9 @@ const SignUpPage = () => {
 	const [passwordType, setPasswordType] = useState<string>("password");
 	const [loading, setLoading] = useState<boolean>(false);
 	const navigate = useNavigate();
+	const [firebaseError, setFirebaseError] = useState<string | undefined>("")
 
 	const { userLoggedIn } = useAuth();
-
 	useEffect(() => {
 		userLoggedIn && navigate("/");
 	}, []);
@@ -35,17 +37,20 @@ const SignUpPage = () => {
 	const onSubmit = async () => {
 		try {
 			setLoading(true);
-			await doCreateUserWithEmailAndPassword(values.email, values.password);
+			const user = await doCreateUserWithEmailAndPassword(values.email, values.password);
+			await addToDb(user, values.name);
 			setLoading(false);
 			navigate("/");
-		} catch (error) {
+		} catch (error: any) {			// is it okay to make error typeof any???
 			console.log(error);
+			setFirebaseError(error?.code)
 		}
 	}
 
 	const {values, handleBlur, isSubmitting, errors, touched, handleChange, handleSubmit} = useFormik<IRegistration>({
 		initialValues: {
 			email: "",
+			name: "",
 			password: "",
 			passwordRepeat: "",
 			termsAndService: false
@@ -53,6 +58,8 @@ const SignUpPage = () => {
 		onSubmit,
 		validationSchema: registrationSchema
 	})
+
+	if (firebaseError) return <div>{t('error')}: {firebaseError}</div>
 
 	return (
 		<div className="relative">
@@ -62,12 +69,12 @@ const SignUpPage = () => {
         bg-posters absolute"
 			></div>
 			<div className="w-full h-[calc(100svh-70px)] min-h-[550px]">
-				<div className="w-full h-[calc(100svh-70px)] sm:rounded sm:h-[500px] sm:mt-10 sm:w-[450px] mx-auto px-[5%] bg-black-default sm:bg-black-70 z-10 relative">
-					<h1 className="text-2xl sm:pt-10 sm:text-4xl text-white">{t("sign-up")}</h1>
+				<div className="w-full h-[calc(100svh-70px)] sm:rounded sm:min-h-[500px] sm:h-fit sm:mt-4 sm:w-[450px] mx-auto px-[5%] bg-black-default sm:bg-black-70 z-10 relative">
+					<h1 className="text-2xl sm:pt-8 sm:text-3xl text-white">{t("sign-up")}</h1>
 					{loading ? (
 						<div>{t('loading')}</div>
 					) : (
-						<form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-6">
+						<form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-5">
 							<div>
 								<input
 									type="text"
@@ -83,6 +90,23 @@ const SignUpPage = () => {
 								/>
 								<div className="text-red-default font-light text-sm">
 									{errors.email && touched.email && <span>{t(errors.email)}</span>}
+								</div>
+							</div>
+							<div>
+								<input
+									type="text"
+									value={values.name}	
+									onChange={handleChange}
+									onBlur={handleBlur}
+									placeholder={t("name")}
+									aria-label={t("name")}
+									name="name"
+									className={`w-full h-10 border ${
+										errors.name && touched.name ? "border-red-default" : "border-bg-hover"
+									} px-4 rounded bg-transparent`}
+								/>
+								<div className="text-red-default font-light text-sm">
+									{errors.name && touched.name && <span>{t(errors.name)}</span>}
 								</div>
 							</div>
 							<div className="relative">
@@ -172,6 +196,7 @@ const SignUpPage = () => {
 								type="submit"
 								disabled={!values.termsAndService || isSubmitting}
 							/>
+							<div className="m-1"></div>
 						</form>
 					)}
 				</div>
