@@ -9,20 +9,21 @@ import YourPrivacyRights from "./PrivacyPageComponents/YourPrivacyRights";
 import ComunicationAndMarketing from "./PrivacyPageComponents/ComunicationAndMarketing";
 import AdvertisingChoices from "./PrivacyPageComponents/AdvertisingChoices";
 import "./PrivacyPage.css";
-
-// TODO:
-// find solution to keep active elements of sidebar in view
-// make onpen/close state of each section
-// pass openSection value as props to components
-// useMemo
+import { Link } from "react-router-dom";
+import Button from "../../components/Button/Button";
+import BurgerButton from "../../components/BurgerButton/BurgerButton";
+import { ReactComponent as ArrowDownFull } from "../../assets/icons/ArrowDownFull.svg";
+import { useTranslation} from "react-i18next";
 
 const PrivacyPage = () => {
   const [ activeTopic, setActiveTopic ] = useState('');
   const [ openSection, setOpenSection ] = useState('');
+  const [ isMobileSidebarOpen, setIsMobileSidebarOpen ] = useState(false);
   const topicRefs = useRef<HTMLDivElement[]>([]);
   const sectionRefs = useRef<HTMLDivElement[]>([]);
   const activeTopicRef = useRef(activeTopic);
-  const activeSectionRef = useRef(openSection); 
+  const activeSectionRef = useRef(openSection);
+  const { t } = useTranslation();
 
   useEffect(() => {
     activeTopicRef.current = activeTopic;
@@ -104,7 +105,6 @@ useEffect(() => {
     };
 }, [openSection, activeTopic, topicObserver]);
 
-
 useEffect(() => {
   const currentSectionRefs = sectionRefs.current;
   if (openSection === '') {
@@ -122,45 +122,96 @@ useEffect(() => {
   }
 }, [openSection, sectionObserver]);
 
+const handleBurgerButtonClick = () => {
+  setIsMobileSidebarOpen(prev => !prev);
+};
+
   return(
-    <div className="bg-white text-black">
-      <div> back to home link and print button here </div>
-      <div>
-        <div className="sideBar sticky top-[100px] max-w-[275px] w-[25%] overflow-y-auto float-left border-t-4 border-red">
-          <SidebarNavigation activeTopic={activeTopic} setActiveTopic={setActiveTopic} allSections={topicRefs.current} openSection={openSection} />
+    <div className="bg-bg-default text-text-default pt-8 pb-12 flex justify-center">
+      <div className="px-3 max-w-[1248px]">
+        <div className="flex items-center relative">
+          <ul className="grow flex mb-8">
+            <li className="flex items-center">
+              <ArrowDownFull className="w-5 h-5 mr-2 rotate-90 fill-text-default" />
+            </li>
+            <li>
+              <Link
+                onClick={() => window.scrollTo({ top: 0, })}
+                to="/faq"
+                className="hover:underline hover:text-text-hover"
+              >
+                {t('backToHelpHome')}
+              </Link>
+            </li>
+          </ul>
+          <div className="mb-8 self-start">
+            <Button label={t('print')} variant="secondary" icon="PrinterIcon" onClick={() => window.print()}></Button>
+          </div>
+          <div className="md:hidden w-[60px]">
+            <div className="fixed top-[102px] right-3 z-10">
+              <div className="bg-bg-default relative">
+                <BurgerButton 
+                  onClick={handleBurgerButtonClick}
+                  isOpen={isMobileSidebarOpen}
+                  variant="burgerBlack" 
+                  background="transparentBlack"
+                  ariaLabel={t('openSidebarButtonAriaLabel')}
+                ></BurgerButton>
+                {isMobileSidebarOpen && (
+                  <div className="absolute right-0 w-[309px] p-2 bg-bg-secondary rounded-xl">
+                    <SidebarNavigation 
+                      activeTopic={activeTopic} 
+                      setActiveTopic={setActiveTopic} 
+                      allSections={topicRefs.current} 
+                      openSection={openSection}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col ml-auto">
-          <PrivacyStatement id="privacy-statement" ref={addToRefs} />
-          <ContactingUs id="contacting-us" ref={addToRefs} />
-          <section ref={addToSectionRefs} id="hidden-section" className=""></section>
-          <section ref={addToSectionRefs} id="section-a-dropdown">
-            <h2 
-              className={`text-3xl my-10 `} 
-              id="section-a" 
-              ref={addToRefs}
-            > 
-              Section A: Our Collection, Use, and Disclosure of Personal Information
-            </h2>
-            <TheCategoriesOfPersonal ref={addToRefs} id="the-categories-of-personal-information-we-collect" />
-            <WhereWeCollectPersonal ref={addToRefs} id="where-we-collect-personal-information-from" />
-            <HowWeUsePersonal ref={addToRefs} id="how-we-use-your-personal-information" />
-          </section>
-          <section ref={addToSectionRefs} id="section-b-dropdown">
-            <h2 
-              className={`text-3xl my-10 `} 
-              id="section-b" 
-              ref={addToRefs}
-            > 
-              Section B: Your Rights and Controls
-            </h2>
-            <YourPrivacyRights ref={addToRefs} id="your-privacy-rights" />
-            <ComunicationAndMarketing ref={addToRefs} id="communication-and-marketing-preferences" />
-            <AdvertisingChoices ref={addToRefs} id="advertising-choices" />
-          </section>
+        <div className="relative">
+          <div className="sideBar mr-10 hidden md:block sticky top-[100px] max-w-[275px] w-[25%] overflow-y-auto float-left border-t-4 border-red-default">
+            <SidebarNavigation 
+              activeTopic={activeTopic} 
+              setActiveTopic={setActiveTopic} 
+              allSections={topicRefs.current} 
+              openSection={openSection}
+            />
+          </div>
+          <div className="flex flex-col ml-auto md:max-w-[70%]">
+            <section ref={addToSectionRefs} id="hidden-section">
+              <PrivacyStatement id="privacy-statement" ref={addToRefs} />
+              <ContactingUs id="contacting-us" ref={addToRefs} />
+            </section>
+            <section ref={addToSectionRefs} id="section-a-dropdown">
+              <h2 
+                className={`text-3xl my-10 `} 
+                id="section-a" 
+                ref={addToRefs}
+              >
+                {t('sectionA')}
+              </h2>
+              <TheCategoriesOfPersonal ref={addToRefs} id="the-categories-of-personal-information-we-collect" />
+              <WhereWeCollectPersonal ref={addToRefs} id="where-we-collect-personal-information-from" />
+              <HowWeUsePersonal ref={addToRefs} id="how-we-use-your-personal-information" />
+            </section>
+            <section ref={addToSectionRefs} id="section-b-dropdown">
+              <h2 
+                className={`text-3xl my-10 `} 
+                id="section-b" 
+                ref={addToRefs}
+              >
+                {t('sectionB')}
+              </h2>
+              <YourPrivacyRights ref={addToRefs} id="your-privacy-rights" />
+              <ComunicationAndMarketing ref={addToRefs} id="communication-and-marketing-preferences" />
+              <AdvertisingChoices ref={addToRefs} id="advertising-choices" />
+            </section>
+          </div>
         </div>
       </div>
-        {/* remove in the end */}
-        <div className="min-h-[200dvh]"></div>
     </div>
   )
 };

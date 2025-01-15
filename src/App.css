@@ -1,3 +1,76 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    --color-red: 229, 9, 20;
+    --color-red-secondary: 193, 17, 25;
+
+    --color-gray: 200, 200, 200;
+    --color-gray-light: 245, 245, 245;
+    --color-gray-secondary: 160, 160, 160;
+    --color-gray-dark: 250, 250, 250;
+    --color-gray-white: 255, 255, 255;
+    --color-gray-40: 190, 190, 190;
+    --color-gray-static: 190, 190, 190;
+    --color-gray-hover: 220, 220, 220;
+
+    --color-black: 34, 34, 34;
+    --color-black-total: 0, 0, 0;
+  
+    --toggle-bg: 229, 229, 229;
+    --toggle-border: 0, 0, 0;
+    --toggle-active: 229, 9, 20;
+    --toggle-hover: 244, 6, 18;
+    --toggle-text: 0, 0, 0;
+    
+    --bg-accent: 0, 0, 0; 
+    --bg-secondary: 160, 160, 160;
+    
+    --color-black-10: 245, 245, 245;
+    --color-black-30: 210, 210, 210;
+    --color-black-70: 90, 90, 90;
+    --color-black-90: 45, 45, 45; 
+    
+    --text-secondary: 76, 76, 76;
+    --text-highlight: 0, 0, 0;
+    --text-hover: 0, 0, 0; 
+    --text-default: 20, 20, 20;
+    --text-accent: 0, 0, 0; 
+    --text-default-reverce: 235, 235, 235;
+  }
+  
+  .dark-theme {  
+    --color-red: 229, 9, 20;
+    --color-red-secondary: 193, 17, 25;
+
+    --color-gray: 115, 115, 115;
+    --color-gray-light: 239, 239, 239;
+    --color-gray-secondary: 76, 73, 72;
+    --color-gray-dark: 24, 24, 24;
+    --color-gray-white: 250, 250, 250;
+    --color-gray-40: 128, 128, 128;
+    --color-gray-static: 190, 190, 190;
+    --color-gray-hover: 128, 128, 128;
+
+    --color-black: 0, 0, 0;
+    --color-black-total: 0, 0, 0;
+
+    --toggle-bg: 20, 20, 20;
+    --toggle-border: 229, 9, 20;
+    --toggle-active: 229, 9, 20;
+    --toggle-hover: 244, 6, 18;
+    --toggle-text: 255, 255, 255;
+
+    --bg-accent: 255, 255, 255; 
+    --bg-secondary: 76, 73, 72;
+  
+    --text-secondary: 200, 200, 200;
+    --text-highlight: 255, 255, 255;
+    --text-hover: 200, 200, 200; 
+    --text-default: 235, 235, 235;
+    --text-accent: 255, 255, 255;
+    --text-default-reverce: 0, 0, 0;
+  }
+}
