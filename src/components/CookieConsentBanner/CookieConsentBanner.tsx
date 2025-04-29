@@ -9,7 +9,7 @@ interface CookieConsentBannerProps {
 const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAcceptClick, onDeclineClick }) => {
   const { t } = useTranslation();
   return (
-    <div className="bg-white text-black-default p-2 fixed bottom-0">
+    <div className="bg-white z-[1000] text-black-default p-2 fixed left-0 bottom-0">
       <h3 className="text-xl font-bold">{t('weValueYourPrivacy')}</h3>
       <p>
         {t('cookieUsageNotice')}

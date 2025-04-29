@@ -39,7 +39,7 @@ const Header = ({
   open ? bodyClass.add('overflow-hidden') : bodyClass.remove('overflow-hidden');
 
   return (
-    <header className="md:flex md:justify-between z-20 md:items-center bg-black-default text-center p-6 fixed top-0 left-0 w-full relative">
+    <header className="md:flex md:justify-between z-50 md:items-center bg-black-default text-center p-6 fixed top-0 left-0 w-full relative">
       <div className="max-w-max">
         <Link onClick={() => window.scrollTo({top: 0,})} to="/">
           <img src={NetflixLogo} alt="Netflix Logo" />

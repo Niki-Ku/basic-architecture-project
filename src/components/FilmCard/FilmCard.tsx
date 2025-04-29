@@ -8,6 +8,7 @@ import { db } from "../..";
 import { doc, updateDoc } from "firebase/firestore";
 import { addMovieToWatchList, removeMovieFromWatchList } from "../../helpers/firebaseUtils";
 import NoImage from "../../assets/images/no-image.jpg";
+import useMobile from "../../hooks/useMobile";
 
 export interface movieCardProps {
 	cardData: Film;
@@ -25,6 +26,7 @@ const FilmCard: React.FC<movieCardProps> = ({
 	const { t } = useTranslation();
 	const { userLoggedIn } = useAuth();
 	const [inList, setInlist] = useState<boolean>(false);
+	const isMobile = useMobile();
 
 	const updateInList = (list: Film[], obj:Film) => {
 		const movieInList = list.find((m) => m.id === obj.id);
@@ -63,7 +65,10 @@ const FilmCard: React.FC<movieCardProps> = ({
 			{userLoggedIn && 			
 				<button
 					onClick={() => onClick()}
-					className="w-7 h-7 absolute top-5 right-2 bg-gray-static rounded-full justify-center items-center z-10 hidden group-hover:flex"
+					className={`
+						w-7 h-7 absolute top-5 right-2 bg-gray-static rounded-full justify-center items-center z-10 flex group-hover:flex
+						${isMobile ? "" : "hidden"}
+					`}
 					aria-label={t('')}   
 				>
 					<BookmarkIcon
@@ -73,7 +78,7 @@ const FilmCard: React.FC<movieCardProps> = ({
 				</button>
 			}
 			<Link onClick={() => window.scrollTo({top: 0,})} to={link}>
-				<div className=" overflow-hidden rounded-2xl relative">
+				<div className="overflow-hidden rounded-2xl relative">
 					<div className="absolute w-full h-full pointer-events-none bg-black-black-30 -top-full group-hover:top-0 right-0 z-10">
 					</div>
 					<img

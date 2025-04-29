@@ -25,14 +25,6 @@ const PrivacyPage = () => {
   const activeSectionRef = useRef(openSection);
   const { t } = useTranslation();
 
-  useEffect(() => {
-    activeTopicRef.current = activeTopic;
-  }, [activeTopic]);
-
-  useEffect(() => {
-    activeSectionRef.current = openSection;
-  }, [openSection]);
-
   const options = useMemo(() => {
     return {
       threshold: 0,
@@ -86,6 +78,14 @@ const PrivacyPage = () => {
       handleIntersection(entries, sectionRefs, activeSectionRef, setOpenSection)
     }, options);
   }, [options]) 
+
+  useEffect(() => {
+    activeTopicRef.current = activeTopic;
+  }, [activeTopic]);
+
+  useEffect(() => {
+    activeSectionRef.current = openSection;
+  }, [openSection]);
 
 useEffect(() => {
   const currentTopicRefs = topicRefs.current;
@@ -172,7 +172,7 @@ const handleBurgerButtonClick = () => {
           </div>
         </div>
         <div className="relative">
-          <div className="sideBar mr-10 hidden md:block sticky top-[100px] max-w-[275px] w-[25%] overflow-y-auto float-left border-t-4 border-red-default">
+          <div className="sideBar mr-10 hidden md:block sticky top-[200px] max-w-[275px] w-[25%] overflow-y-auto float-left border-t-4 border-red-default">
             <SidebarNavigation 
               activeTopic={activeTopic} 
               setActiveTopic={setActiveTopic} 
@@ -181,13 +181,13 @@ const handleBurgerButtonClick = () => {
             />
           </div>
           <div className="flex flex-col ml-auto md:max-w-[70%]">
-            <section ref={addToSectionRefs} id="hidden-section">
+            <section ref={addToSectionRefs} id="hidden-section" className="flex flex-col gap-20">
               <PrivacyStatement id="privacy-statement" ref={addToRefs} />
               <ContactingUs id="contacting-us" ref={addToRefs} />
             </section>
-            <section ref={addToSectionRefs} id="section-a-dropdown">
+            <section ref={addToSectionRefs} id="section-a-dropdown" className="flex flex-col gap-10">
               <h2 
-                className={`text-3xl my-10 `} 
+                className={`text-3xl mt-20 `} 
                 id="section-a" 
                 ref={addToRefs}
               >
@@ -197,9 +197,9 @@ const handleBurgerButtonClick = () => {
               <WhereWeCollectPersonal ref={addToRefs} id="where-we-collect-personal-information-from" />
               <HowWeUsePersonal ref={addToRefs} id="how-we-use-your-personal-information" />
             </section>
-            <section ref={addToSectionRefs} id="section-b-dropdown">
+            <section ref={addToSectionRefs} id="section-b-dropdown" className="flex flex-col gap-10">
               <h2 
-                className={`text-3xl my-10 `} 
+                className={`text-3xl mt-20`} 
                 id="section-b" 
                 ref={addToRefs}
               >
