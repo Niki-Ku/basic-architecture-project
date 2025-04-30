@@ -33,7 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ links, query, setQuery, onSubmit,
   }
   
   return (
-    <div className={`h-max w-full rounded p-0.5 z-10 relative text-left
+    <div className={`h-max w-full rounded p-0.5 z-20 relative text-left
       bg-gradient-to-r from-[#e50914] from-[-0.08%] via-[#c94ff5] via-[81%] to-[#5b79f1] to-[99.92%]
       ${query.length > 0 && 'rounded-br-none rounded-bl-none'}`}
     >
@@ -50,7 +50,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ links, query, setQuery, onSubmit,
           />
           <SearchIcon className="w-6 h-6 fill-text-default absolute top-[9px] left-3.5 pointer-events-none" />
         </form>
-        <div className=" absolute left-0 w-full block rounded-br rounded-bl bg-gradient-to-r from-[#e50914] from-[-0.08%] via-[#c94ff5] via-[81%] to-[#5b79f1] to-[99.92%]">
+        <div className="absolute left-0 w-full block rounded-br rounded-bl bg-gradient-to-r from-[#e50914] from-[-0.08%] via-[#c94ff5] via-[81%] to-[#5b79f1] to-[99.92%]">
           <div className="bg-bg-primary mt-0 m-[2px] rounded-br rounded-bl">
             <ul className={`${filteredItems.length > 0 && query.length > 0 && "flex flex-col gap-2 p-1 border-t border-black-10"}`}>
               {isFocused && query.length > 0 && debouncedFilteredItems.slice(0, 5).map((link, index) => (

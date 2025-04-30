@@ -36,9 +36,9 @@ const Dropdown: React.FC<IDropdown> = ({
 				</summary>
 				<ul className="pt-4 pb-1">
 					{links.subCategories.map((subCategory) => (
-						<div
+						<li
 							key={subCategory.subCategoryName}
-							className="flex flex-wrap mb-4 w-max"
+							className="flex flex-nowrap mb-4"
 						>
 							<ArticleIcon className="w-[16px] h-[16px] fill-text-default mr-2 mt-1" />
 							<Link
@@ -46,9 +46,9 @@ const Dropdown: React.FC<IDropdown> = ({
 								to={subCategory.subCategoryPath}
 								className="underline hover:text-text-accent"
 							>
-								<li className="text-wrap">{t(subCategory.subCategoryName)}</li>
+								<span className="text-wrap break-normal">{t(subCategory.subCategoryName)}</span>
 							</Link>
-						</div>
+						</li>
 					))}
 				</ul>
 			</details>
