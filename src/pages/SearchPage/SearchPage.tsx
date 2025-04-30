@@ -1,32 +1,29 @@
 import { useAuth } from "../../context/AuthContext";
-import { useQuery, useInfiniteQuery } from "react-query";
+import { useQuery, useInfiniteQuery, useMutation } from "react-query";
 import { getUserFromDb } from "../../helpers/firebaseUtils";
-import { DbUser, Genre, Links, Data } from "../../types/global";
-import { useEffect, useState, useRef } from "react";
+import { DbUser, Genre, Links, Film } from "../../types/global";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import useDebounce from "../../hooks/useDebounce";
 import { fetchGenres } from "../../api/MoviesApi";
-import { dataFetch } from "../../helpers/fetchUtils";
+import { dataFetch, getMultiplePagesSearch } from "../../helpers/fetchUtils";
 import FilmCard from "../../components/FilmCard/FilmCard";
-import Button from "../../components/Button/Button";
 import { getMultiplePages } from "../../helpers/fetchUtils";
+import { Pagination } from "@heroui/pagination";
 
 const SearchPage = () => {
-	const { t, i18n } = useTranslation();
+	const { i18n } = useTranslation();
 	const [lang, setLang] = useState(i18n.language);
 	const { currentUser } = useAuth();
 	const [searchValue, setSearchValue] = useState<string>("");
 	const debouncedSearchValue = useDebounce(searchValue);
-	const [searchPageNumber, setSearchPageNumber] = useState<number>(1);
-	const [totalSearchPagesNumber, setTotalSearchPagesNumber] =
-		useState<number>(1);
+
 	const searchLinks = useRef<Links[]>([]);
 	const genresOptions = fetchGenres(lang);
-	const [displayFilmCards, setDisplayFilmCards] = useState<
-		React.ReactElement<typeof FilmCard>[]
-	>([]);
 
+	const [page, setPage] = useState<number>(1);
+	const pageRef = useRef<number>(1);
 	const { data: additionalUser } = useQuery<DbUser | undefined>(
 		["user", currentUser],
 		() => getUserFromDb(currentUser?.uid),
@@ -34,22 +31,40 @@ const SearchPage = () => {
 	);
 
 	const {
+		data: allMovies,
+		error: allMoviesError,
+		isLoading: allMoviesLoading,
+	} = useQuery<{ results: Film[]; page: number; total_pages: number }>(
+		["allMovies", lang, page],
+		() => getMultiplePages(pageRef.current, lang),
+		{ keepPreviousData: true }
+	);
+
+	const { data: searchedData, mutate } = useMutation<{
+		results: Film[];
+		page: number;
+		total_pages: number;
+	}>({
+		mutationFn: () =>
+			getMultiplePagesSearch(pageRef.current, searchValue, lang),
+	});
+
+	const {
 		data: searchData,
 		error,
-		isFetchingNextPage,
 	} = useInfiniteQuery({
-		queryKey: [
-			`searchData-${debouncedSearchValue}`,
-			searchValue,
-      searchPageNumber,
-      lang
-		],
-		queryFn: () => getMultiplePages(searchPageNumber, searchValue, lang),
+		queryKey: [`searchData-${debouncedSearchValue}`, searchValue, page, lang],
+		queryFn: () => getMultiplePagesSearch(page, searchValue, lang),
 	});
 
 	const { data: genersData } = useQuery<{ genres: Genre[] }>(
 		["genresData", lang],
 		() => dataFetch(genresOptions)
+	);
+
+	const displayMovies = useMemo(
+		() => (searchedData ? searchedData : allMovies),
+		[allMovies, searchedData]
 	);
 
 	if (searchData?.pages)
@@ -60,51 +75,23 @@ const SearchPage = () => {
 				path: `../movies/${item.id}`,
 			}));
 
-	const generateFilmCards = (searchData: Data) => {
-		if (genersData) {
-			const filmCards = searchData.results.map((page, index) => (
-				<div
-					key={`${index}-${searchPageNumber}-${page.title}`}
-					className="basis-full sm:basis-[30%] md:basis-[15%] xl:basis-[10%]"
-				>
-					<FilmCard
-						cardData={page}
-						genres={genersData.genres}
-						link={`../movies/${page.id}`}
-						user={additionalUser}
-					/>
-				</div>
-			));
-			return filmCards;
-		} else return [] as React.ReactElement<typeof FilmCard>[];
-	};
-
 	const onSearchSubmit = () => {
-		if (searchData?.pages && genersData) {
-			searchData.pages.forEach((page) => {
-				setDisplayFilmCards(generateFilmCards(page));
-			});
-			setTotalSearchPagesNumber(searchData.pages[0].total_pages);
-		}
+		mutate();
 	};
 
-	const onLoadMoreClick = () => {
-		setSearchPageNumber((prev) => prev + 1);
-		searchData?.pages.forEach((page) => {
-			console.log(page);
-			setDisplayFilmCards((prev) => {
-				const previous = prev ?? [];
-				return [...previous, ...generateFilmCards(page).flat()];
-			});
-		});
+	const onPaginationClick = (page: number) => {
+		setPage(page);
+		pageRef.current = page;
+		if (searchData?.pages[0].results.length !== 0) mutate();
+		window.scrollTo({ top: 0 });
 	};
 
 	useEffect(() => {
 		setLang(i18n.language);
-  }, [i18n.language]);
-  
-  if (error) return <div>Error loading data...</div>
-  
+	}, [i18n.language]);
+
+	if (error) return <div>Error loading data...</div>;
+
 	return (
 		<div className="w-[90%] min-h-[100svh] max-w-[1640px] mx-auto">
 			<div className="my-4">
@@ -112,17 +99,37 @@ const SearchPage = () => {
 					links={searchLinks.current}
 					query={searchValue}
 					setQuery={setSearchValue}
-          onSubmit={onSearchSubmit}
-          placeholder="searchMovies"
+					onSubmit={onSearchSubmit}
+					placeholder="searchMovies"
 				/>
 			</div>
 			<div className="flex gap-10 sm:gap-4 flex-wrap pt-4 mb-4">
-				{displayFilmCards}
+				{displayMovies &&
+					genersData &&
+					displayMovies.results.map((m, i) => (
+						<div
+							key={`${i}-${page}-${m.title}`}
+							className="basis-full sm:basis-[30%] md:basis-[15%] xl:basis-[10%]"
+						>
+							<FilmCard
+								cardData={m}
+								genres={genersData.genres}
+								link={`../movies/${m.id}`}
+								user={additionalUser}
+							/>
+						</div>
+					))}
 			</div>
-			{totalSearchPagesNumber > searchPageNumber && !isFetchingNextPage && (
-				<div className="mb-20">
-					<Button label={t('loadMore')} onClick={onLoadMoreClick} wide></Button>
-				</div>
+			{displayMovies && (
+				<Pagination
+					classNames={{
+						cursor: "bg-red-default",
+						item: "bg-gray-light",
+					}}
+					onChange={onPaginationClick}
+					initialPage={page}
+					total={displayMovies?.total_pages}
+				/>
 			)}
 		</div>
 	);

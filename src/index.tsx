@@ -13,6 +13,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import "./i18n"
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthContextProvider } from "./context/AuthContext";
+import { HeroUIProvider } from "@heroui/system";
 
 const queryClient = new QueryClient();
 
@@ -28,15 +29,17 @@ const root = ReactDOM.createRoot(
 
 root.render(
 	<ThemeProvider>
-		<Provider store={store}>
-			<Router>
-				<AuthContextProvider>
-					<QueryClientProvider client={queryClient}> 
-						<App />
-					</QueryClientProvider>
-				</AuthContextProvider>
-			</Router>
-		</Provider>
+		<HeroUIProvider>
+			<Provider store={store}>
+				<Router>
+					<AuthContextProvider>
+						<QueryClientProvider client={queryClient}> 
+							<App />
+						</QueryClientProvider>
+					</AuthContextProvider>
+				</Router>
+			</Provider>
+		</HeroUIProvider>
 	</ThemeProvider>
 );
 

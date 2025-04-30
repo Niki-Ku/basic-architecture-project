@@ -1,7 +1,13 @@
+const { heroui } = require('@heroui/theme');
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./public/index.html",
+    "./node_modules/@heroui/react/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/components/pagination.js",
+  ],
   darkMode: 'class',
   theme: {
     extend: {
@@ -83,5 +89,6 @@ module.exports = {
         },
       });
     }),
+    heroui()
   ],
 };
