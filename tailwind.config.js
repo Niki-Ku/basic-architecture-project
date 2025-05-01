@@ -13,8 +13,8 @@ module.exports = {
         xxl: 'calc((100% - 1rem * 8) / 9)',
       },
       backgroundImage: {
-        'error-image': "url('/src/assets/images/error-bg.png')",
-        'posters': "url('/src/assets/images/sign-in.jpg')",
+        'error-image': "url('/src/assets/images/error-bg.webp')",
+        'posters': "url('/src/assets/images/sign-in.webp')",
       },
       colors: {
         red: {

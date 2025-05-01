@@ -1,11 +1,11 @@
-import Joker from "../assets/images/joker.jpg"
-import JokerMobile from "../assets/images/joker-mobile.jpg"
-import JohnWick from "../assets/images/john-wick.jpg"
-import JohnWickMobile from "../assets/images/john-wick-mobile.jpg"
-import Avatar from "../assets/images/avatar.jpg"
-import AvatarMobile from "../assets/images/avatar-mobile.jpg"
-import PulpFiction from "../assets/images/pulp-fiction.jpg"
-import PulpFictionMobile from "../assets/images/pulp-fiction-mobile.jpg"
+import Joker from "../assets/images/joker.webp"
+import JokerMobile from "../assets/images/joker-mobile.webp"
+import JohnWick from "../assets/images/john-wick.webp"
+import JohnWickMobile from "../assets/images/john-wick-mobile.webp"
+import Avatar from "../assets/images/avatar.webp"
+import AvatarMobile from "../assets/images/avatar-mobile.webp"
+import PulpFiction from "../assets/images/pulp-fiction.webp"
+import PulpFictionMobile from "../assets/images/pulp-fiction-mobile.webp"
 
 export const swiperMovies = [
   {

@@ -14,7 +14,7 @@ import PrivacyPage from "./pages/PrivacyPage/PrivacyPage";
 import TermsOfUsePage from "./pages/TermsOfUsePage/TermsOfUsePage";
 import CookieConsentBanner from "./components/CookieConsentBanner/CookieConsentBanner";
 import PromotionalBanner from "./components/PromotionalBanner/PromotionalBanner";
-import Banner from './assets/images/movie-trendy-banner-vector.jpg'
+import Banner from './assets/images/movie-trendy-banner-vector.webp'
 import { useThemeContext } from "./context/ThemeContext";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";

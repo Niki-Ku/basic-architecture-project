@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import NetflixLogo from '../../assets/images/netflix-logo.png';
+import NetflixLogo from '../../assets/images/netflix-logo.webp';
 import { links, unauthorizedLinks } from '../../config/routeConfig';
 import ToggleButton from "../ToggleButton/ToggleButton";
 import BurgerButton from "../BurgerButton/BurgerButton";
