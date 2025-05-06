@@ -12,7 +12,7 @@ import useMobile from "../../hooks/useMobile";
 
 export interface movieCardProps {
 	cardData: Film;
-	genres: Genre[];
+	genres?: Genre[];
 	link: string;
 	user?: DbUser;
 }
@@ -83,12 +83,14 @@ const FilmCard: React.FC<movieCardProps> = ({
 					</div>
 					<img
 						className="w-full ablsoute object-cover"
+						width={200}
+						height={200}
 						src={cardData.poster_path ? `https://image.tmdb.org/t/p/w500${cardData.poster_path}` : NoImage}
 						alt={cardData.title + t('movie')}
 					/>
 				</div>
 				<h4 className="font-semibold">{cardData.title}</h4>
-				{genres.map(
+				{genres && genres.map(
 					(genre, index) => {
 						if (cardData.genre_ids)
 							return Number(genre.id) === cardData.genre_ids[0] && <p key={genre.id + index} className="text-xs">{genre.name}</p>
