@@ -9,12 +9,12 @@ import { useState, useRef } from "react";
 interface SearchBarProps {
   links: Links[];
   query: string;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  onQueryChange: (query : string) => void;
   onSubmit?: (e: React.FormEvent) => void;
   placeholder?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ links, query, setQuery, onSubmit, placeholder }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ links, query, onQueryChange, onSubmit, placeholder }) => {
   const { t } = useTranslation();
   const filteredItems = links.filter(item => item.name.toLocaleLowerCase().includes(query.toLocaleLowerCase()));
   const debouncedFilteredItems = useDebounce(filteredItems);
@@ -40,7 +40,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ links, query, setQuery, onSubmit,
       <div className={`rounded overflow-hidden ${query.length > 0 && 'rounded-br-none rounded-bl-none'}`}>
         <form className="relative" onSubmit={(e) => handleSubmit(e)}>
           <input 
-            onChange={(e) => setQuery(e.target.value)} 
+            onChange={(e) => onQueryChange(e.target.value)} 
             onFocus={() => setIsFocused(true)}
             ref={inputRef}
             type="search" 
