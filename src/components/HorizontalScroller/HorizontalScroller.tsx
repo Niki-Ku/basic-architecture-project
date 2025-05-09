@@ -35,7 +35,7 @@ const HorizontalScroller: React.FC<IHorizontalScroller> = ({
 	};
 
 	return (
-		<section className="group/scroll md:px-10 relative">
+		<section className="group/scroll px-5 md:px-10 relative">
 			{heading && link &&
 				<Link onClick={() => window.scrollTo({top: 0,})} to={link}>
 					<div className="text-2xl inline-block mb-2 mx-2">
@@ -54,7 +54,7 @@ const HorizontalScroller: React.FC<IHorizontalScroller> = ({
 			<div
 				ref={scrollContainerRef}
 				className="scrollbar overflow-x-auto scroll-smooth scroll-px-2 sm:scroll-px-0 grid grid-flow-col gap-4 snap-x
-					auto-cols-mobile sm:auto-cols-sm md:auto-cols-md lg:auto-cols-lg 2xl:auto-cols-xxl"
+					auto-cols-mobile sm:auto-cols-sm md:auto-cols-md lg:auto-cols-lg xl:auto-cols-xxl " 
 			>
 				{films.map((film) => (
 					<FilmCard

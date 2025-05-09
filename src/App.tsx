@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, fetchData } from "../src/store/actions/dataActions";
 import "./App.css";
 import { RootState } from "./store/index";
 import { Route, Routes } from "react-router-dom";
-import SearchPage from "./pages/SearchPage/SearchPage";
-import HomePage from "./pages/HomePage/HomePage";
-import UserPage from "./pages/UserPage/UserPage";
-import FaqPage from "./pages/FaqPage/FaqPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import PrivacyPage from "./pages/PrivacyPage/PrivacyPage";
-import TermsOfUsePage from "./pages/TermsOfUsePage/TermsOfUsePage";
-import CookieConsentBanner from "./components/CookieConsentBanner/CookieConsentBanner";
 import PromotionalBanner from "./components/PromotionalBanner/PromotionalBanner";
 import Banner from './assets/images/movie-trendy-banner-vector.jpg'
 import { useThemeContext } from "./context/ThemeContext";
-import ErrorPage from "./pages/ErrorPage/ErrorPage";
-import SignUpPage from "./pages/SignUpPage/SignUpPage";
-import SignInPage from "./pages/SignInPage/SignInPage";
 import PrivateRoute from "./context/PrivateRoute";
-import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage";
-import MoviePage from "./pages/MoviePage/MoviePage";
 import { getFromLocalStorage, setToLocalStorage } from "./helpers/storageUtils";
+
+const SearchPage = lazy(() => import("./pages/SearchPage/SearchPage"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const UserPage = lazy(() => import("./pages/UserPage/UserPage"));
+const FaqPage = lazy(() => import("./pages/FaqPage/FaqPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage/PrivacyPage"));
+const TermsOfUsePage = lazy(() => import("./pages/TermsOfUsePage/TermsOfUsePage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
+const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
+const ResetPasswordPage = lazy(() => import("./pages/ResetPasswordPage/ResetPasswordPage"));
+const MoviePage = lazy(() => import("./pages/MoviePage/MoviePage"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage/ErrorPage"));
+const CookieConsentBanner = lazy(() => import("./components/CookieConsentBanner/CookieConsentBanner"));
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -102,21 +103,23 @@ function App() {
     <div className={`App ${darkMode.darkMode === "dark" && 'dark-theme'}`}>
       <main className="bg-bg-primary text-text-default grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
         <Header darkMode={darkMode.darkMode} handleDarkModeChange={handleDarkModeChange} />
-        <Routes >
-          <Route path="/" element={<HomePage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/login" element={<SignInPage />} />
-          <Route path="/reset" element={<ResetPasswordPage />} />
-          <Route path="/faq" element={<FaqPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/termsofuse" element={<TermsOfUsePage />} />
-          <Route path="*" element={<ErrorPage />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
-          <Route path="movies/:movieId" element={<MoviePage />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/user" element={<UserPage />} />
-          </Route>
-        </Routes>
+        <Suspense fallback={<div>Loading page...</div>}>
+          <Routes >
+            <Route path="/" element={<HomePage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/login" element={<SignInPage />} />
+            <Route path="/reset" element={<ResetPasswordPage />} />
+            <Route path="/faq" element={<FaqPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/termsofuse" element={<TermsOfUsePage />} />
+            <Route path="*" element={<ErrorPage />} />
+            <Route path="/sign-up" element={<SignUpPage />} />
+            <Route path="movies/:movieId" element={<MoviePage />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/user" element={<UserPage />} />
+            </Route>
+          </Routes>
+        </Suspense>
         <Footer />
         {isBannerVisible && (
           <CookieConsentBanner onAcceptClick={handleAccept} onDeclineClick={handleDecline} />

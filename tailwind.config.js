@@ -10,13 +10,22 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
+    screens: {
+      sm: '540px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+    },
     extend: {
       gridAutoColumns: {
-        mobile: 'calc(50% - 1rem)',
-        sm: 'calc((100% - 1rem * 2) / 3)',
-        md: 'calc((100% - 1rem * 4) / 5)',
-        lg: 'calc((100% - 1rem * 6) / 7)',
-        xxl: 'calc((100% - 1rem * 8) / 9)',
+        mobile: 'calc(90% - 10%)',
+        sm: 'calc((100% - 1rem * 1) / 2)',
+        md: 'calc((100% - 1rem * 2) / 3)',
+        lg: 'calc((100% - 1rem * 3) / 4)',
+        xxl: 'calc((100% - 1rem * 4) / 5)',
+      },
+      gridTemplateColumns: {
+        cards: 'repeat(auto-fill, 230px)',
       },
       backgroundImage: {
         'error-image': "url('/src/assets/images/error-bg.png')",

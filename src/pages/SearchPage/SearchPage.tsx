@@ -9,6 +9,7 @@ import { useAllMovies } from "../../hooks/useAllMovies";
 import { useDbUser } from "../../hooks/useDbUser";
 import { useGenres } from "../../hooks/useGenres";
 import { useSearchMutation } from "../../hooks/useSearchMutation";
+import DisplayFilmCardsSkeleton from "../../components/DisplayFilmCards/DisplayFilmCardsSkeleton";
 
 const SearchPage = () => {
 	const { i18n } = useTranslation();
@@ -71,8 +72,9 @@ const SearchPage = () => {
 		setLang(i18n.language);
 	}, [i18n.language]);
 
-	if (isError || allMoviesError || !displayMovies) return <div>Error loading data...</div>;
-	if (isLoading || allMoviesLoading) return <div>Loadin...</div>;
+	if (isError || allMoviesError) return <div>Error loading data...</div>;
+	if (!displayMovies) return <DisplayFilmCardsSkeleton />
+	// if (isLoading || allMoviesLoading) return <div>Loadin...</div>;
 
 	return (
 		<div className="w-[90%] min-h-[100svh] max-w-[1640px] mx-auto">
@@ -85,21 +87,29 @@ const SearchPage = () => {
 					placeholder="searchMovies"
 				/>
 			</div>
-			<DisplayFilmCards
-				movies={displayMovies.results}
-				genres={genersData?.genres}
-				user={additionalUser}
-			/>
-			<Pagination
-				classNames={{
-					cursor: "bg-red-default",
-					item: "bg-text-default text-bg-primary",
-					wrapper: "mx-auto",
-				}}
-				onChange={onPaginationClick}
-				initialPage={page}
-				total={displayMovies?.total_pages}
-			/>
+			{(isLoading || allMoviesLoading)
+				? (<DisplayFilmCardsSkeleton />)
+				// ? (<div className="bg-bg-primary min-h-[1500svh] md:min-h-[400svh]">Loadinggggggg...</div>)
+				: (
+					<>
+						<DisplayFilmCards
+							movies={displayMovies.results}
+							genres={genersData?.genres}
+							user={additionalUser}
+						/>
+						<Pagination
+							classNames={{
+								cursor: "bg-red-default",
+								item: "bg-text-default text-bg-primary",
+								wrapper: "mx-auto",
+							}}
+							onChange={onPaginationClick}
+							initialPage={page}
+							total={displayMovies?.total_pages}
+						/>
+					</>
+				)
+			}
 		</div>
 	);
 };

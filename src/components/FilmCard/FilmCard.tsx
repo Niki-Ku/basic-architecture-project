@@ -61,7 +61,7 @@ const FilmCard: React.FC<movieCardProps> = ({
 	}
 
 	return (
-		<div className="group snap-start relative">
+		<div className="group snap-start relative w-[230px]">
 			{userLoggedIn && 			
 				<button
 					onClick={() => onClick()}
@@ -78,16 +78,24 @@ const FilmCard: React.FC<movieCardProps> = ({
 				</button>
 			}
 			<Link onClick={() => window.scrollTo({top: 0,})} to={link}>
-				<div className="overflow-hidden rounded-2xl relative">
+				<div className="overflow-hidden rounded-2xl relative w-[230px] aspect-[3/4]">
 					<div className="absolute w-full h-full pointer-events-none bg-black-black-30 -top-full group-hover:top-0 right-0 z-10">
 					</div>
-					<img
-						className="w-full ablsoute object-cover"
-						width={200}
-						height={200}
-						src={cardData.poster_path ? `https://image.tmdb.org/t/p/w500${cardData.poster_path}` : NoImage}
+					{cardData.poster_path ? (
+						<img
+							className="w-full h-full object-cover"
+							loading="eager"
+							src={`https://image.tmdb.org/t/p/w300${cardData.poster_path}`}
+							alt={cardData.title + t('movie')}
+						/>
+
+					) : (
+						<img
+						className="w-full h-full object-cover"
+						src={NoImage}
 						alt={cardData.title + t('movie')}
 					/>
+					)}
 				</div>
 				<h4 className="font-semibold">{cardData.title}</h4>
 				{genres && genres.map(
