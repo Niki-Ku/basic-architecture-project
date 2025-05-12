@@ -120,3 +120,5 @@ export interface ISignIn {
 	password: string;
 	rememberMe: boolean;
 }
+
+export type moviesType = "now_playing" | "top_rated" | "upcoming" | "popular";

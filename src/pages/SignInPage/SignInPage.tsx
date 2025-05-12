@@ -18,7 +18,7 @@ const SignInPage = () => {
 			<div
 				className="
         w-full h-[calc(100svh-70px)] md:h-[calc(100svh-78px)] min-h-[550px]
-        bg-posters absolute"
+        sm:bg-posters absolute"
 			></div>
 			<div className="w-full h-[calc(100svh-70px)] md:h-[calc(100svh-78px)] min-h-[550px]">
 				<div className="w-full h-[calc(100svh-70px)] sm:rounded sm:h-[500px] sm:mt-10 sm:w-[450px] mx-auto px-[5%] bg-black-default sm:bg-black-70 z-10 relative">
