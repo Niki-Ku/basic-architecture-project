@@ -20,6 +20,10 @@ export const footerLinks = [
     name: 'email',
     path: 'mailto:niki.kuzk013@gmail.com',
   },
+  {
+    name: 'termsOfUse',
+    path: '/terms',
+  },
   // {
   //   name: 'aboutUs',
   //   path: '/',
