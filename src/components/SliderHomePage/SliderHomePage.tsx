@@ -5,7 +5,6 @@ import { pagination, autoplay } from "../../helpers/sliderUtils";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { swiperMovies } from "../../config/swiperMovies";
 import { useTranslation } from "react-i18next";
-import "./SliderHomePage.css";
 import "swiper/css";
 import "swiper/css/pagination";
 

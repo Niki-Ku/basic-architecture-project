@@ -4,10 +4,9 @@ import {
 } from "firebase/auth";
 import { useFormik } from "formik";
 import { t } from "i18next";
-import { useState} from "react";
+import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link, useNavigate } from "react-router-dom";
-import useDebounce from "../../hooks/useDebounce";
 import { signInSchema } from "../../schemas/yupSchemas";
 import {
 	doSetPersistence,
@@ -17,8 +16,6 @@ import { ISignIn } from "../../types/global";
 import Button from "../Button/Button";
 import HideShowPassButton from "../HideShowPassButton/HideShowPassButton";
 
-// captcha doesn't allow user to authorize
-
 const SignInForm = () => {
 	const navigate = useNavigate();
 	const [passwordType, setPasswordType] = useState<string>("password");
@@ -27,7 +24,6 @@ const SignInForm = () => {
 		errorCount: 0,
 	});
 	const [loading, setLoading] = useState<boolean>(false);
-	const [captchaValue, setCaptchaValue] = useState<string | null>("");
 	const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
 	const handleError = (errorCode: string) => {
@@ -61,6 +57,10 @@ const SignInForm = () => {
 		}
 	};
 
+	const handleCaptchaChange = (value: string | null) => {
+		setPasswordState((prev) => ({ ...prev, errorCount: 0 }));
+	};
+
 	const {
 		values,
 		handleBlur,
@@ -78,13 +78,6 @@ const SignInForm = () => {
 		onSubmit,
 		validationSchema: signInSchema,
 	});
-
-	const handleCaptchaChange = useDebounce(
-    (value: string | null) => {
-      setCaptchaValue(value)
-    },
-		300
-	);
 
 	if (loading) return <div>{t("loading")}</div>;
 
@@ -131,9 +124,7 @@ const SignInForm = () => {
 			<Button
 				label={t("sign-in")}
 				type="submit"
-				disabled={
-					isSubmitting || (passwordState.errorCount > 2 && !captchaValue)
-				}
+				disabled={isSubmitting || passwordState.errorCount > 2}
 			/>
 			<div className="flex justify-between">
 				<div className="flex items-center gap-2">
@@ -159,7 +150,7 @@ const SignInForm = () => {
 				<div>
 					<ReCAPTCHA
 						sitekey={`${siteKey}`}
-						onChange={(val) => handleCaptchaChange}
+						onChange={(val) => handleCaptchaChange(val)}
 					/>
 				</div>
 			)}

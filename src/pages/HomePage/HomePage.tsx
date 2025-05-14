@@ -1,5 +1,6 @@
 import DisplayMoviesSections from "../../components/DisplayMoviesSections/DisplayMoviesSections";
 import SliderHomePage from "../../components/SliderHomePage/SliderHomePage";
+import "./HomePage.css";
 
 const HomePage = () => {
 	return (
