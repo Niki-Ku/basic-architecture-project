@@ -1,7 +1,7 @@
 import SidebarDropdown from "../SidebarDropdown/SidebarDropdown";
 import { sidebarDropdownLinks } from "../../config/routeConfig";
 
-interface ISidebarNavigation {
+export interface ISidebarNavigation {
   activeTopic: string;
   allSections: HTMLDivElement[];
   setActiveTopic: Function;

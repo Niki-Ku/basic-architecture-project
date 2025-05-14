@@ -109,7 +109,7 @@ function App() {
           <Route path="/reset" element={<ResetPasswordPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/termsofuse" element={<TermsOfUsePage />} />
+          <Route path="/terms" element={<TermsOfUsePage />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="movies/:movieId" element={<MoviePage />} />
