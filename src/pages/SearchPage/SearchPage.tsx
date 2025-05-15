@@ -89,7 +89,6 @@ const SearchPage = () => {
 			</div>
 			{(isLoading || allMoviesLoading)
 				? (<DisplayFilmCardsSkeleton />)
-				// ? (<div className="bg-bg-primary min-h-[1500svh] md:min-h-[400svh]">Loadinggggggg...</div>)
 				: (
 					<>
 						<DisplayFilmCards

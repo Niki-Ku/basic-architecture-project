@@ -28,8 +28,8 @@ module.exports = {
         cards: 'repeat(auto-fill, 230px)',
       },
       backgroundImage: {
-        'error-image': "url('/src/assets/images/error-bg.png')",
-        'posters': "url('/src/assets/images/sign-in.jpg')",
+        'error-image': "url('/src/assets/images/error-bg.webp')",
+        'posters': "url('/src/assets/images/sign-in.webp')",
       },
       colors: {
         red: {

@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import NetflixLogo from '../../assets/images/netflix-logo.png';
+import NetflixLogo from '../../assets/images/netflix-logo.webp';
 import { links, unauthorizedLinks } from '../../config/routeConfig';
 import ToggleButton from "../ToggleButton/ToggleButton";
 import BurgerButton from "../BurgerButton/BurgerButton";
@@ -42,7 +42,7 @@ const Header = ({
     <header className="md:flex md:justify-between z-50 md:items-center bg-black-default text-center p-6 fixed top-0 left-0 w-full relative">
       <div className="max-w-max">
         <Link onClick={() => window.scrollTo({top: 0,})} to="/">
-          <img src={NetflixLogo} alt="Netflix Logo" />
+          <img src={NetflixLogo} width={86} height={22} alt="Netflix Logo" />
         </Link>
       </div>
       <div className="absolute top-[20%] right-[6%] md:hidden">

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { db } from "../..";
 import { doc, updateDoc } from "firebase/firestore";
 import { addMovieToWatchList, removeMovieFromWatchList } from "../../helpers/firebaseUtils";
-import NoImage from "../../assets/images/no-image.jpg";
+import NoImage from "../../assets/images/no-image.webp";
 import useMobile from "../../hooks/useMobile";
 
 export interface movieCardProps {

@@ -29,7 +29,7 @@ const SliderHomePage = () => {
 							}}
 						>
 							<div className="absolute bottom-5 left-5">
-								<Link onClick={() => window.scrollTo({ top: 0 })} to={m.link}>
+								<Link onClick={() =>  window.scrollTo({ top: 0 })} to={m.link}>
 									<p className="text-3xl md:text-6xl">{t(m.title)}</p>
 								</Link>
 							</div>
