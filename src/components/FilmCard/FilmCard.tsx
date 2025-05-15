@@ -4,9 +4,7 @@ import { ReactComponent as BookmarkIcon } from "../../assets/icons/BookmarkIcon.
 import { DbUser, Film, Genre } from "../../types/global";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
-import { db } from "../..";
-import { doc, updateDoc } from "firebase/firestore";
-import { addMovieToWatchList, removeMovieFromWatchList } from "../../helpers/firebaseUtils";
+import { addMovieToWatchList, initFirebase, removeMovieFromWatchList } from "../../helpers/firebaseUtils";
 import NoImage from "../../assets/images/no-image.webp";
 import useMobile from "../../hooks/useMobile";
 
@@ -43,6 +41,9 @@ const FilmCard: React.FC<movieCardProps> = ({
 
 	const onClick = async () => {
 		if (user) {
+			const { db } = await initFirebase();
+			const { doc, updateDoc } = await import("firebase/firestore");
+
 			const docRef = doc(db, "users", user.docId);
 			const userWatchList = user.watchList;
 			let updatedList: Film[] = [];

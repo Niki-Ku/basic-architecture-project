@@ -6,8 +6,8 @@ import Button from "../../components/Button/Button";
 import TrailerComponent from "../../components/TrailerComponent/TrailerComponent";
 import { useAuth } from "../../context/AuthContext";
 import { Film } from "../../types/global";
-import { addMovieToWatchList, removeMovieFromWatchList } from "../../helpers/firebaseUtils";
-import { db } from "../..";
+import { addMovieToWatchList, initFirebase, removeMovieFromWatchList } from "../../helpers/firebaseUtils";
+// import { db } from "../..";
 import { doc, updateDoc } from "firebase/firestore";
 import { useDbUser } from "../../hooks/useDbUser";
 import { useMovie } from "../../hooks/useMovie";
@@ -40,6 +40,7 @@ const MoviePage = () => {
 				...data,
 				genre_ids: [data.genres[0].id],
 			}
+			const { db } = await initFirebase();
 			const docRef = doc(db, "users", additionalUser.docId);
 			const userWatchList = additionalUser.watchList;
 			let updatedList: Film[] = []

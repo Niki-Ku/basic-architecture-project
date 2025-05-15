@@ -5,10 +5,6 @@ import "./tailwind.output.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/index";
-import { firebaseConfig } from "./config/firebaseConfig";
-import { getFirestore, collection } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-import { initializeApp } from "firebase/app";
 import { ThemeProvider } from "./context/ThemeContext";
 import "./i18n"
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -16,12 +12,6 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { HeroUIProvider } from "@heroui/system";
 
 const queryClient = new QueryClient();
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-const usersColection = collection(db, "users");
-export {app, auth, db, usersColection}
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
