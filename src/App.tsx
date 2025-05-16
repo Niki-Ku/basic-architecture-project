@@ -119,7 +119,7 @@ function App() {
 					<Route
 						path="/"
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading home...</div>}>
 								<HomePage />
 							</Suspense>
 						}
@@ -127,7 +127,7 @@ function App() {
 					<Route
 						path="/search"
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading search...</div>}>
 								<SearchPage />
 							</Suspense>
 						}
@@ -135,7 +135,7 @@ function App() {
 					<Route
 						path="/login"
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading login...</div>}>
 								<SignInPage />
 							</Suspense>
 						}
@@ -143,7 +143,7 @@ function App() {
 					<Route
 						path="/reset"
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading reset...</div>}>
 								<ResetPasswordPage />
 							</Suspense>
 						}
@@ -151,7 +151,7 @@ function App() {
 					<Route
 						path="/faq"
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading faq...</div>}>
 								<FaqPage />
 							</Suspense>
 						}
@@ -159,7 +159,7 @@ function App() {
 					<Route
 						path="/privacy"
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading privacy...</div>}>
 								<PrivacyPage />
 							</Suspense>
 						}
@@ -167,7 +167,7 @@ function App() {
 					<Route
 						path="/termsofuse"
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading terms...</div>}>
 								<TermsOfUsePage />
 							</Suspense>
 						}
@@ -175,7 +175,7 @@ function App() {
 					<Route
 						path="*"
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading error...</div>}>
 								<ErrorPage />
 							</Suspense>
 						}
@@ -183,7 +183,7 @@ function App() {
 					<Route
 						path="/sign-up"
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading sign up...</div>}>
 								<SignUpPage />
 							</Suspense>
 						}
@@ -191,7 +191,7 @@ function App() {
 					<Route
 						path="movies/:movieId"
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading movie page...</div>}>
 								<MoviePage />
 							</Suspense>
 						}
@@ -206,7 +206,7 @@ function App() {
 						<Route
 							path="/user"
 							element={
-								<Suspense fallback={<div>Loading...</div>}>
+								<Suspense fallback={<div>Loading user...</div>}>
 									<UserPage />
 								</Suspense>
 							}
