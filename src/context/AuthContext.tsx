@@ -22,6 +22,7 @@ export const AuthContextProvider = ({ children } : { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [authReady, setAuthReady] = useState<boolean>(false);
 
   useEffect(() => {
     let unsubscribe: () => void;
@@ -31,6 +32,7 @@ export const AuthContextProvider = ({ children } : { children: ReactNode }) => {
       unsubscribe = onAuthStateChanged(auth, (user) => {
         startTransition(() => {
           initializeUser(user);
+          setAuthReady(true);
         });
       });
       }
@@ -57,6 +59,8 @@ export const AuthContextProvider = ({ children } : { children: ReactNode }) => {
     userLoggedIn,
     loading
   }
+
+  if (!authReady) return <div>Loading auth...</div>
 
   return (
     <AuthContext.Provider value={value}>
