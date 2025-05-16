@@ -10,8 +10,16 @@ import "./i18n"
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthContextProvider } from "./context/AuthContext";
 import { HeroUIProvider } from "@heroui/system";
+import { getMultiplePages } from "./helpers/fetchUtils";
+import { fetchMovies } from "./api/MoviesApi";
 
 const queryClient = new QueryClient();
+
+queryClient.prefetchQuery(["allMovies"], () => getMultiplePages(1, "en"))
+queryClient.prefetchQuery(["upcoming"], () => fetchMovies(1, "en", "upcoming"))
+queryClient.prefetchQuery(["top_rated"], () => fetchMovies(1, "en", "top_rated"))
+queryClient.prefetchQuery(["popular"], () => fetchMovies(1, "en", "popular"))
+queryClient.prefetchQuery(["now_playing"], () => fetchMovies(1, "en", "now_playing"))
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement

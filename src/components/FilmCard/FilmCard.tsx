@@ -85,7 +85,8 @@ const FilmCard: React.FC<movieCardProps> = ({
 					{cardData.poster_path ? (
 						<img
 							className="w-full h-full object-cover"
-							loading="eager"
+							// loading="eager"
+							loading="lazy"
 							src={`https://image.tmdb.org/t/p/w300${cardData.poster_path}`}
 							alt={cardData.title + t('movie')}
 						/>
