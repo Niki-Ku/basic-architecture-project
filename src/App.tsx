@@ -105,7 +105,7 @@ function App() {
 		dispatch(fetchData());
 	}, [dispatch]);
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <p>Loading App...</p>;
 	if (error) return <p>Error: {error}</p>;
 	console.log(data, "data");
 	return (
@@ -198,7 +198,7 @@ function App() {
 					/>
 					<Route
 						element={
-							<Suspense fallback={<div>Loading...</div>}>
+							<Suspense fallback={<div>Loading private...</div>}>
 								<PrivateRoute />
 							</Suspense>
 						}
