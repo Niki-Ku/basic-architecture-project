@@ -12,6 +12,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { HeroUIProvider } from "@heroui/system";
 import { getMultiplePages } from "./helpers/fetchUtils";
 import { fetchMovies } from "./api/MoviesApi";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 const queryClient = new QueryClient();
 
@@ -26,19 +27,21 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-	<ThemeProvider>
-		<HeroUIProvider>
-			<Provider store={store}>
-				<Router>
-					<AuthContextProvider>
-						<QueryClientProvider client={queryClient}> 
-							<App />
-						</QueryClientProvider>
-					</AuthContextProvider>
-				</Router>
-			</Provider>
-		</HeroUIProvider>
-	</ThemeProvider>
+	<ErrorBoundary>
+		<ThemeProvider>
+			<HeroUIProvider>
+				<Provider store={store}>
+					<Router>
+						<AuthContextProvider>
+							<QueryClientProvider client={queryClient}> 
+								<App />
+							</QueryClientProvider>
+						</AuthContextProvider>
+					</Router>
+				</Provider>
+			</HeroUIProvider>
+		</ThemeProvider>
+	</ErrorBoundary>
 );
 
 // If you want to start measuring performance in your app, pass a function

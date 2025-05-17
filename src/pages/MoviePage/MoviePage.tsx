@@ -74,7 +74,7 @@ const MoviePage = () => {
 		setLang(i18n.language);
 	}, [i18n.language]);
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading) return <div>Loading Movies...</div>;
 
 	if (isError || !data) 
 		return <div>Error loading data or no data available</div>;

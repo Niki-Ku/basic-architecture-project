@@ -15,13 +15,13 @@ export const doSignInWithEmailAndPassword = async (email: string, password: stri
   return signInWithEmailAndPassword(auth, email, password);
 }
 
-export const doSignInWithGoogle = async () => {
-  const { signInWithPopup, GoogleAuthProvider } = await import("firebase/auth");
-  const { auth } = await initFirebase()
-  const provider = new GoogleAuthProvider();
-  const result = signInWithPopup(auth, provider);
-  return result
-}
+// export const doSignInWithGoogle = async () => {
+//   const { signInWithPopup, GoogleAuthProvider } = await import("firebase/auth");
+//   const { auth } = await initFirebase()
+//   const provider = new GoogleAuthProvider();
+//   const result = signInWithPopup(auth, provider);
+//   return result
+// }
 
 export const doSignOut = async () => {
   const { auth } = await initFirebase()

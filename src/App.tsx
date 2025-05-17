@@ -1,8 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, fetchData } from "../src/store/actions/dataActions";
+// import { useDispatch, useSelector } from "react-redux";
+// import { AppDispatch, fetchData } from "../src/store/actions/dataActions";
 import "./App.css";
-import { RootState } from "./store/index";
+// import { RootState } from "./store/index";
 import { Route, Routes } from "react-router-dom";
 import { useThemeContext } from "./context/ThemeContext";
 import PrivateRoute from "./context/PrivateRoute";
@@ -34,7 +34,7 @@ const CookieConsentBanner = lazy(
 );
 
 function App() {
-	const dispatch = useDispatch<AppDispatch>();
+	// const dispatch = useDispatch<AppDispatch>();
 	const [isBannerVisible, setIsBannerVisible] = useState(false);
 	const [isPromotionalBannerVisible, setIsPromotionalBannerVisible] =
 		useState<boolean>();
@@ -70,11 +70,11 @@ function App() {
 		setIsPromotionalBannerVisible(false);
 	};
 
-	const data = useSelector((state: RootState) => state.yourStateSlice.data);
-	const loading = useSelector(
-		(state: RootState) => state.yourStateSlice.loading
-	);
-	const error = useSelector((state: RootState) => state.yourStateSlice.error);
+	// const data = useSelector((state: RootState) => state.yourStateSlice.data);
+	// const loading = useSelector(
+	// 	(state: RootState) => state.yourStateSlice.loading
+	// );
+	// const error = useSelector((state: RootState) => state.yourStateSlice.error);
 
 	useEffect(() => {
 		const cookieConsent = document.cookie
@@ -101,20 +101,22 @@ function App() {
 		setIsBannerVisible(false);
 	};
 
-	useEffect(() => {
-		dispatch(fetchData());
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	dispatch(fetchData());
+	// }, [dispatch]);
 
-	if (loading) return <p>Loading App...</p>;
-	if (error) return <p>Error: {error}</p>;
-	console.log(data, "data");
+	// if (loading) return <p>Loading App...</p>;
+	// if (error) return <p>Error: {error}</p>;
+	// console.log(data, "data");
 	return (
 		<div className={`App ${darkMode.darkMode === "dark" && "dark-theme"}`}>
 			<main className="bg-bg-primary text-text-default grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
-				<Header
-					darkMode={darkMode.darkMode}
-					handleDarkModeChange={handleDarkModeChange}
-				/>
+				<Suspense fallback={<div>Header</div>}>
+					<Header
+						darkMode={darkMode.darkMode}
+						handleDarkModeChange={handleDarkModeChange}
+					/>
+				</Suspense>
 				<Routes>
 					<Route
 						path="/"
@@ -196,13 +198,7 @@ function App() {
 							</Suspense>
 						}
 					/>
-					<Route
-						element={
-							<Suspense fallback={<div>Loading private...</div>}>
-								<PrivateRoute />
-							</Suspense>
-						}
-					>
+					<Route element={<PrivateRoute />}>
 						<Route
 							path="/user"
 							element={
@@ -213,19 +209,23 @@ function App() {
 						/>
 					</Route>
 				</Routes>
-				<Footer />
+				<Suspense fallback={<div>Footer</div>}>
+					<Footer />
+				</Suspense>
 				{isBannerVisible && (
 					<CookieConsentBanner
 						onAcceptClick={handleAccept}
 						onDeclineClick={handleDecline}
 					/>
 				)}
-				{isPromotionalBannerVisible && (
-					<PromotionalBanner
-						alt="our new show"
-						onCloseClick={handlePromotionalBannerClose}
-					/>
-				)}
+				<Suspense fallback={<div>Loading promo banner...</div>}>
+					{isPromotionalBannerVisible && (
+						<PromotionalBanner
+							alt="our new show"
+							onCloseClick={handlePromotionalBannerClose}
+						/>
+					)}
+				</Suspense>
 			</main>
 		</div>
 	);
