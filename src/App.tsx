@@ -1,12 +1,9 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { AppDispatch, fetchData } from "../src/store/actions/dataActions";
-import "./App.css";
-// import { RootState } from "./store/index";
 import { Route, Routes } from "react-router-dom";
 import { useThemeContext } from "./context/ThemeContext";
 import PrivateRoute from "./context/PrivateRoute";
 import { getFromLocalStorage, setToLocalStorage } from "./helpers/storageUtils";
+import "./App.css";
 
 const Header = lazy(() => import("./components/Header/Header"));
 const Footer = lazy(() => import("./components/Footer/Footer"));
@@ -34,7 +31,6 @@ const CookieConsentBanner = lazy(
 );
 
 function App() {
-	// const dispatch = useDispatch<AppDispatch>();
 	const [isBannerVisible, setIsBannerVisible] = useState(false);
 	const [isPromotionalBannerVisible, setIsPromotionalBannerVisible] =
 		useState<boolean>();
@@ -70,12 +66,6 @@ function App() {
 		setIsPromotionalBannerVisible(false);
 	};
 
-	// const data = useSelector((state: RootState) => state.yourStateSlice.data);
-	// const loading = useSelector(
-	// 	(state: RootState) => state.yourStateSlice.loading
-	// );
-	// const error = useSelector((state: RootState) => state.yourStateSlice.error);
-
 	useEffect(() => {
 		const cookieConsent = document.cookie
 			.split("; ")
@@ -101,13 +91,6 @@ function App() {
 		setIsBannerVisible(false);
 	};
 
-	// useEffect(() => {
-	// 	dispatch(fetchData());
-	// }, [dispatch]);
-
-	// if (loading) return <p>Loading App...</p>;
-	// if (error) return <p>Error: {error}</p>;
-	// console.log(data, "data");
 	return (
 		<div className={`App ${darkMode.darkMode === "dark" && "dark-theme"}`}>
 			<main className="bg-bg-primary text-text-default grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">

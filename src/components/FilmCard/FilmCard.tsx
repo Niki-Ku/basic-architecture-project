@@ -104,6 +104,7 @@ const FilmCard: React.FC<movieCardProps> = ({
 					(genre, index) => {
 						if (cardData.genre_ids)
 							return Number(genre.id) === cardData.genre_ids[0] && <p key={genre.id + index} className="text-xs">{genre.name}</p>
+						return null
 					}
 				)}
 			</Link>
