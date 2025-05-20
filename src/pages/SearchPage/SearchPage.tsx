@@ -74,7 +74,6 @@ const SearchPage = () => {
 
 	if (isError || allMoviesError) return <div>Error loading data...</div>;
 	if (!displayMovies) return <DisplayFilmCardsSkeleton />
-	// if (isLoading || allMoviesLoading) return <div>Loadin...</div>;
 
 	return (
 		<div className="w-[90%] min-h-[100svh] max-w-[1640px] mx-auto">

@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, startTransition, useContext, useEffect, useState } from "react";
 import { initFirebase } from "../helpers/firebaseUtils";
 import { User } from "firebase/auth";
 
@@ -28,7 +28,11 @@ export const AuthContextProvider = ({ children } : { children: ReactNode }) => {
     const getAuth = async ()=> {
       const { auth, onAuthStateChanged } = await initFirebase()
       if (auth && onAuthStateChanged) {
-        unsubscribe = onAuthStateChanged(auth, initializeUser)
+      unsubscribe = onAuthStateChanged(auth, (user) => {
+        startTransition(() => {
+          initializeUser(user);
+        });
+      });
       }
     }
     getAuth();

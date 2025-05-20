@@ -7,7 +7,6 @@ import TrailerComponent from "../../components/TrailerComponent/TrailerComponent
 import { useAuth } from "../../context/AuthContext";
 import { Film } from "../../types/global";
 import { addMovieToWatchList, initFirebase, removeMovieFromWatchList } from "../../helpers/firebaseUtils";
-// import { db } from "../..";
 import { doc, updateDoc } from "firebase/firestore";
 import { useDbUser } from "../../hooks/useDbUser";
 import { useMovie } from "../../hooks/useMovie";
@@ -68,13 +67,13 @@ const MoviePage = () => {
 
 	useEffect(() => {
 		if (movieId) setId(movieId)
-	}, [])
+	}, [movieId])
 
 	useEffect(() => {
 		setLang(i18n.language);
 	}, [i18n.language]);
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading) return <div className="h-[130svh]">Loading...</div>;
 
 	if (isError || !data) 
 		return <div>Error loading data or no data available</div>;
