@@ -94,7 +94,7 @@ function App() {
 	return (
 		<div className={`App ${darkMode.darkMode === "dark" && "dark-theme"}`}>
 			<main className="bg-bg-primary text-text-default grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
-				<Suspense fallback={<div>Header</div>}>
+				<Suspense fallback={<div className="h-[80px]">Loading Header</div>}>
 					<Header
 						darkMode={darkMode.darkMode}
 						handleDarkModeChange={handleDarkModeChange}
@@ -192,7 +192,7 @@ function App() {
 						/>
 					</Route>
 				</Routes>
-				<Suspense fallback={<div>Footer</div>}>
+				<Suspense fallback={<div className="h-[375px]">Footer</div>}>
 					<Footer />
 				</Suspense>
 				{isBannerVisible && (
