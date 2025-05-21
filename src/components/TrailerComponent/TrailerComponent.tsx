@@ -8,7 +8,7 @@ interface ITrailerComponent {
 const TrailerComponent:React.FC<ITrailerComponent> = ({src, title, isError, isLoading}) => {
 
   if (isError) return <div>Error fetching trailer</div>;
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading trailer...</div>;
 
   return (
     <div className="w-full h-[300px] md:h-[500px] px-5 md:px-10 my-20">

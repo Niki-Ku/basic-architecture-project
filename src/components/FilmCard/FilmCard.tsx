@@ -4,10 +4,8 @@ import { ReactComponent as BookmarkIcon } from "../../assets/icons/BookmarkIcon.
 import { DbUser, Film, Genre } from "../../types/global";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
-import { db } from "../..";
-import { doc, updateDoc } from "firebase/firestore";
-import { addMovieToWatchList, removeMovieFromWatchList } from "../../helpers/firebaseUtils";
-import NoImage from "../../assets/images/no-image.jpg";
+import { addMovieToWatchList, initFirebase, removeMovieFromWatchList } from "../../helpers/firebaseUtils";
+import NoImage from "../../assets/images/no-image.webp";
 import useMobile from "../../hooks/useMobile";
 
 export interface movieCardProps {
@@ -43,6 +41,9 @@ const FilmCard: React.FC<movieCardProps> = ({
 
 	const onClick = async () => {
 		if (user) {
+			const { db } = await initFirebase();
+			const { doc, updateDoc } = await import("firebase/firestore");
+
 			const docRef = doc(db, "users", user.docId);
 			const userWatchList = user.watchList;
 			let updatedList: Film[] = [];
@@ -61,7 +62,7 @@ const FilmCard: React.FC<movieCardProps> = ({
 	}
 
 	return (
-		<div className="group snap-start relative">
+		<div className="group snap-start relative w-[230px]">
 			{userLoggedIn && 			
 				<button
 					onClick={() => onClick()}
@@ -78,22 +79,32 @@ const FilmCard: React.FC<movieCardProps> = ({
 				</button>
 			}
 			<Link onClick={() => window.scrollTo({top: 0,})} to={link}>
-				<div className="overflow-hidden rounded-2xl relative">
+				<div className="overflow-hidden rounded-2xl relative w-[230px] aspect-[3/4]">
 					<div className="absolute w-full h-full pointer-events-none bg-black-black-30 -top-full group-hover:top-0 right-0 z-10">
 					</div>
-					<img
-						className="w-full ablsoute object-cover"
-						width={200}
-						height={200}
-						src={cardData.poster_path ? `https://image.tmdb.org/t/p/w500${cardData.poster_path}` : NoImage}
+					{cardData.poster_path ? (
+						<img
+							className="w-full h-full object-cover"
+							loading="eager"
+							// loading="lazy"
+							src={`https://image.tmdb.org/t/p/w300${cardData.poster_path}`}
+							alt={cardData.title + t('movie')}
+						/>
+
+					) : (
+						<img
+						className="w-full h-full object-cover"
+						src={NoImage}
 						alt={cardData.title + t('movie')}
 					/>
+					)}
 				</div>
 				<h4 className="font-semibold">{cardData.title}</h4>
 				{genres && genres.map(
 					(genre, index) => {
 						if (cardData.genre_ids)
 							return Number(genre.id) === cardData.genre_ids[0] && <p key={genre.id + index} className="text-xs">{genre.name}</p>
+						return null
 					}
 				)}
 			</Link>

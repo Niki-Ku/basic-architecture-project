@@ -14,7 +14,7 @@ interface IHorizontalMD {
 const HorizontalMoviesDisplay:React.FC<IHorizontalMD> = ({ movies, genres, link, heading, loading, error, user }) => {
 
   if (error) return <div>Error fetching data...</div>
-  if (loading) return <div>Loading...</div>
+  if (loading) return <div>Loading Scroller...</div>
 
   return (
     <div className="first:mt-4">
