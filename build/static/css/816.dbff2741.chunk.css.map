@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/816.dbff2741.chunk.css","mappings":"AAAA,SACE,8BAA+B,CAC/B,oBACF","sources":["pages/PrivacyPage/PrivacyPage.css"],"sourcesContent":[".sideBar {\r\n  max-height: calc(100vh - 175px);\r\n  scrollbar-width: none;\r\n}"],"names":[],"sourceRoot":""}
