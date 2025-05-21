@@ -9,16 +9,9 @@ import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage/HomePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 
-
-
-// const Header = lazy(() => import("./components/Header/Header"));
-// const Footer = lazy(() => import("./components/Footer/Footer"));
 const PromotionalBanner = lazy(
 	() => import("./components/PromotionalBanner/PromotionalBanner")
 );
-
-// const SearchPage = lazy(() => import("./pages/SearchPage/SearchPage"));
-// const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const UserPage = lazy(() => import("./pages/UserPage/UserPage"));
 const FaqPage = lazy(() => import("./pages/FaqPage/FaqPage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage/PrivacyPage"));
@@ -89,20 +82,18 @@ function App() {
 	};
 
 	const handleAccept = (): void => {
-		setCookie("cookieConsent", "accepted", 30); // Set for 30 days
+		setCookie("cookieConsent", "accepted", 30);
 		setIsBannerVisible(false);
 	};
 
 	const handleDecline = (): void => {
-		setCookie("cookieConsent", "declined", 30); // Set for 30 days
+		setCookie("cookieConsent", "declined", 30);
 		setIsBannerVisible(false);
 	};
 
 	return (
 		<div className={`App ${darkMode.darkMode === "dark" && "dark-theme"}`}>
 			<main className="bg-bg-primary text-text-default grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
-				{/* <Suspense fallback={<div className="h-[70px] md:h-[80px]">Loading Header</div>}>
-				</Suspense> */}
 					<Header
 						darkMode={darkMode.darkMode}
 						handleDarkModeChange={handleDarkModeChange}
@@ -199,8 +190,6 @@ function App() {
 						/>
 					</Route>
 				</Routes>
-				{/* <Suspense fallback={<div className="h-[375px]">Footer</div>}>
-				</Suspense> */}
 					<Footer />
 				{isBannerVisible && (
 					<CookieConsentBanner
