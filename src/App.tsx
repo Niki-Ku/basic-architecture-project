@@ -4,9 +4,13 @@ import { useThemeContext } from "./context/ThemeContext";
 import PrivateRoute from "./context/PrivateRoute";
 import { getFromLocalStorage, setToLocalStorage } from "./helpers/storageUtils";
 import "./App.css";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
-const Header = lazy(() => import("./components/Header/Header"));
-const Footer = lazy(() => import("./components/Footer/Footer"));
+
+
+// const Header = lazy(() => import("./components/Header/Header"));
+// const Footer = lazy(() => import("./components/Footer/Footer"));
 const PromotionalBanner = lazy(
 	() => import("./components/PromotionalBanner/PromotionalBanner")
 );
@@ -38,6 +42,7 @@ function App() {
 
 	const date = new Date();
 	const bannerShowedDate = getFromLocalStorage("bannerDate");
+
 	useEffect(() => {
 		const diffInMilliseconds = date.getTime() - bannerShowedDate;
 		const diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
@@ -94,12 +99,12 @@ function App() {
 	return (
 		<div className={`App ${darkMode.darkMode === "dark" && "dark-theme"}`}>
 			<main className="bg-bg-primary text-text-default grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
-				<Suspense fallback={<div className="h-[70px] md:h-[80px]">Loading Header</div>}>
+				{/* <Suspense fallback={<div className="h-[70px] md:h-[80px]">Loading Header</div>}>
+				</Suspense> */}
 					<Header
 						darkMode={darkMode.darkMode}
 						handleDarkModeChange={handleDarkModeChange}
 					/>
-				</Suspense>
 				<Routes>
 					<Route
 						path="/"
@@ -192,9 +197,9 @@ function App() {
 						/>
 					</Route>
 				</Routes>
-				<Suspense fallback={<div className="h-[375px]">Footer</div>}>
+				{/* <Suspense fallback={<div className="h-[375px]">Footer</div>}>
+				</Suspense> */}
 					<Footer />
-				</Suspense>
 				{isBannerVisible && (
 					<CookieConsentBanner
 						onAcceptClick={handleAccept}
