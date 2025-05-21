@@ -111,17 +111,17 @@ function App() {
 					<Route
 						path="/"
 						element={
+							<Suspense fallback={<div className="h-[200svh]">Loading home...</div>}>
 								<HomePage />
-							// <Suspense fallback={<div className="h-[200svh]">Loading home...</div>}>
-							// </Suspense>
+							</Suspense>
 						}
 					/>
 					<Route
 						path="/search"
 						element={
+							<Suspense fallback={<div className="h-[200svh]">Loading search...</div>}>
 								<SearchPage />
-							// <Suspense fallback={<div className="h-[200svh]">Loading search...</div>}>
-							// </Suspense>
+							</Suspense>
 						}
 					/>
 					<Route
