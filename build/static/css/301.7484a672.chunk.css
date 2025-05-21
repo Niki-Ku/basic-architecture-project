@@ -1,0 +1,2 @@
+.arrow-parent:hover .arrow{-webkit-animation-duration:.35s;animation-duration:.35s;-webkit-animation-iteration-count:2;animation-iteration-count:2;-webkit-animation-name:arrow-topDown;animation-name:arrow-topDown;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out}@-webkit-keyframes arrow-topDown{0%{top:24px}50%{top:34px}to{top:24px}}@keyframes arrow-topDown{0%{top:24px}50%{top:34px}to{top:24px}}
+/*# sourceMappingURL=301.7484a672.chunk.css.map*/
