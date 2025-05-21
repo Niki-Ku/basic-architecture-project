@@ -4,15 +4,15 @@ import { useThemeContext } from "./context/ThemeContext";
 import PrivateRoute from "./context/PrivateRoute";
 import { getFromLocalStorage, setToLocalStorage } from "./helpers/storageUtils";
 import "./App.css";
-// import Header from "./components/Header/Header";
-// import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage/HomePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 
 
 
-const Header = lazy(() => import("./components/Header/Header"));
-const Footer = lazy(() => import("./components/Footer/Footer"));
+// const Header = lazy(() => import("./components/Header/Header"));
+// const Footer = lazy(() => import("./components/Footer/Footer"));
 const PromotionalBanner = lazy(
 	() => import("./components/PromotionalBanner/PromotionalBanner")
 );
@@ -111,17 +111,17 @@ function App() {
 					<Route
 						path="/"
 						element={
-							<Suspense fallback={<div className="h-[200svh]">Loading home...</div>}>
 								<HomePage />
-							</Suspense>
+							// <Suspense fallback={<div className="h-[200svh]">Loading home...</div>}>
+							// </Suspense>
 						}
 					/>
 					<Route
 						path="/search"
 						element={
-							<Suspense fallback={<div className="h-[200svh]">Loading search...</div>}>
 								<SearchPage />
-							</Suspense>
+							// <Suspense fallback={<div className="h-[200svh]">Loading search...</div>}>
+							// </Suspense>
 						}
 					/>
 					<Route
