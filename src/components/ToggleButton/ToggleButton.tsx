@@ -6,7 +6,7 @@ interface IToggleButton {
 
 const ToggleButton: React.FC<IToggleButton> = ({ id, checked, onChange }) => {
 	return (
-		<div className="w-min h-min flex align-center justify-center border-red-secondary border rounded-full">
+		<div className="w-[62px] h-[32px] flex align-center justify-center border-red-secondary border rounded-full">
 			<input
 				type="checkbox"
 				onChange={onChange}

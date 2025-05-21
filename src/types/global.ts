@@ -54,20 +54,20 @@ export interface Movie {
 }
 
 export interface Film {
-    title: string;
-    poster_path: string;
-    genre_ids?: number[];
-    genres: Genre[];
-    id: string;
-  }
+	title: string;
+	poster_path: string;
+	genre_ids?: number[];
+	genres: Genre[];
+	id: string;
+}
 
 export interface Trailer {
-	id:  string;
+	id: string;
 	key: string;
 	name: string;
-	site:  string;
+	site: string;
 	type: string;
-	official: boolean
+	official: boolean;
 }
 
 export interface IGenre {
@@ -92,18 +92,33 @@ export interface Links {
 }
 
 export interface Data {
-  page: number;
-  results: Movie[];
-  total_pages: number;
-  total_results: number;
+	page: number;
+	results: Movie[];
+	total_pages: number;
+	total_results: number;
 }
 
 export interface ISubCategories {
-  subCategoryName: string;
-  subCategoryPath: string;
+	subCategoryName: string;
+	subCategoryPath: string;
 }
 
 export interface ICategory {
-  categoryTitle: string;
-  subCategories: ISubCategories[];
+	categoryTitle: string;
+	subCategories: ISubCategories[];
 }
+
+export interface IRegistration {
+	email: string;
+	name: string;
+	password: string;
+	passwordRepeat: string;
+	termsAndService: boolean;
+}
+export interface ISignIn {
+	email: string;
+	password: string;
+	rememberMe: boolean;
+}
+
+export type moviesType = "now_playing" | "top_rated" | "upcoming" | "popular";

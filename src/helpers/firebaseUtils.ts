@@ -1,13 +1,27 @@
-import { addDoc, getDocs, query } from "firebase/firestore";
-import { usersColection} from "../index";
 import { DbUser, FirebaseUser, Film } from "../types/global";
+import { firebaseConfig } from "../config/firebaseConfig";
+
+export const initFirebase = async () => {
+  const { initializeApp } = await import("firebase/app");
+  const { getAuth, onAuthStateChanged } = await import("firebase/auth");
+  const { getFirestore, collection } = await import("firebase/firestore");
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const usersColection = collection(db, "users");
+
+  return { app, auth, db, usersColection, onAuthStateChanged };
+};
 
 export const addToDb = async (user:FirebaseUser | null, name:string) => {
 	if (!user) {
     console.log("No user is signed in.");
     return;
 	} 
-	else {
+  else {
+    const { addDoc } = await import("firebase/firestore");
+    const { usersColection } = await initFirebase()
 		const { uid } = user;
 		await addDoc(usersColection, { uid, name, watchList: [] });
 	}
@@ -15,6 +29,8 @@ export const addToDb = async (user:FirebaseUser | null, name:string) => {
 
 export const getUsersList = async (): Promise<DbUser[] | undefined> => {
   try {
+    const { getDocs, query } = await import("firebase/firestore");
+    const { usersColection } = await initFirebase()
     const q = query(usersColection);
     const docUsersSnap = await getDocs(q);
     const users: DbUser[] = docUsersSnap.docs.map(doc => {

@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@heroui/pagination": "^2.2.17",
+    "@heroui/system": "^2.4.15",
+    "@heroui/theme": "^2.4.15",
     "@testing-library/jest-dom": "^5.17.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.52",
@@ -15,6 +18,7 @@
     "axios": "^1.5.0",
     "firebase": "^11.0.0",
     "formik": "^2.4.6",
+    "framer-motion": "^12.9.2",
     "i18next": "^23.16.4",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-localstorage-backend": "^4.2.0",
@@ -30,7 +34,7 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "swiper": "^11.1.15",
-    "tailwindcss": "^3.3.3",
+    "tailwindcss": "^3.4.3",
     "web-vitals": "^2.1.4",
     "yup": "^1.4.0"
   },

@@ -9,12 +9,12 @@ import { useState, useRef } from "react";
 interface SearchBarProps {
   links: Links[];
   query: string;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  onQueryChange: (query : string) => void;
   onSubmit?: (e: React.FormEvent) => void;
   placeholder?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ links, query, setQuery, onSubmit, placeholder }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ links, query, onQueryChange, onSubmit, placeholder }) => {
   const { t } = useTranslation();
   const filteredItems = links.filter(item => item.name.toLocaleLowerCase().includes(query.toLocaleLowerCase()));
   const debouncedFilteredItems = useDebounce(filteredItems);
@@ -33,14 +33,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ links, query, setQuery, onSubmit,
   }
   
   return (
-    <div className={`h-max w-full rounded p-0.5 z-10 relative text-left
+    <div className={`h-max w-full rounded p-0.5 z-20 relative text-left
       bg-gradient-to-r from-[#e50914] from-[-0.08%] via-[#c94ff5] via-[81%] to-[#5b79f1] to-[99.92%]
       ${query.length > 0 && 'rounded-br-none rounded-bl-none'}`}
     >
       <div className={`rounded overflow-hidden ${query.length > 0 && 'rounded-br-none rounded-bl-none'}`}>
         <form className="relative" onSubmit={(e) => handleSubmit(e)}>
           <input 
-            onChange={(e) => setQuery(e.target.value)} 
+            onChange={(e) => onQueryChange(e.target.value)} 
             onFocus={() => setIsFocused(true)}
             ref={inputRef}
             type="search" 
@@ -50,7 +50,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ links, query, setQuery, onSubmit,
           />
           <SearchIcon className="w-6 h-6 fill-text-default absolute top-[9px] left-3.5 pointer-events-none" />
         </form>
-        <div className=" absolute left-0 w-full block rounded-br rounded-bl bg-gradient-to-r from-[#e50914] from-[-0.08%] via-[#c94ff5] via-[81%] to-[#5b79f1] to-[99.92%]">
+        <div className="absolute left-0 w-full block rounded-br rounded-bl bg-gradient-to-r from-[#e50914] from-[-0.08%] via-[#c94ff5] via-[81%] to-[#5b79f1] to-[99.92%]">
           <div className="bg-bg-primary mt-0 m-[2px] rounded-br rounded-bl">
             <ul className={`${filteredItems.length > 0 && query.length > 0 && "flex flex-col gap-2 p-1 border-t border-black-10"}`}>
               {isFocused && query.length > 0 && debouncedFilteredItems.slice(0, 5).map((link, index) => (
