@@ -51,7 +51,7 @@ const Header = ({
 					/>
 				</Link>
 			</div>
-			<div className="absolute top-[20%] right-[6%] md:hidden">
+			<div className="absolute top-[20%] right-[6%] md:hidden z-20">
 				<BurgerButton
 					isOpen={open}
 					variant="burger"
@@ -62,7 +62,7 @@ const Header = ({
 			<nav className="flex">
 				<ul
 					className={`
-          bg-slate-900 absolute w-full left-0 top-0 pt-10 h-screen z-[-1]
+          bg-slate-900 absolute w-full left-0 top-0 pt-10 h-screen z-10
           ease-in transition durarion-1000 md:duration-0 ${
 						open ? "" : "-translate-y-[100vh]"
 					} 
