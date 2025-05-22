@@ -56,7 +56,7 @@ const DisplayMoviesSections = () => {
 	}, [i18n.language]);
 
 	return (
-		<div>
+		<div className=" max-w-[1400px] mx-auto ">
 			{movieSections.map((section) => (
 				<HorizontalMoviesDisplay
 					key={section.heading}

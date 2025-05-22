@@ -18,7 +18,7 @@ module.exports = {
     },
     extend: {
       gridAutoColumns: {
-        mobile: 'calc(90% - 10%)',
+        mobile: 'calc(85% - 15%)',
         sm: 'calc((100% - 1rem * 1) / 2)',
         md: 'calc((100% - 1rem * 2) / 3)',
         lg: 'calc((100% - 1rem * 3) / 4)',
