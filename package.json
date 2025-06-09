@@ -44,7 +44,8 @@
     "eject": "react-scripts eject",
     "test": "jest",
     "postinstall": "npm run build:css",
-    "build:css": "postcss src/index.css -o src/tailwind.output.css"
+    "build:css": "postcss src/index.css -o src/tailwind.output.css",
+    "coverage": "yarn test --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'"
   },
   "eslintConfig": {
     "extends": [

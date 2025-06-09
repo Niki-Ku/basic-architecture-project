@@ -203,7 +203,8 @@
   "yourWatchlist": "Your Watchlist",
   "searchMovies": "Search Movies",
   "loadMore": "Load More",
-  "systemStatus": "System Status"
+  "systemStatus": "System Status",
+  "no_data": "No data"
 
 }
 
