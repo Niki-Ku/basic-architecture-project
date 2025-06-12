@@ -53,9 +53,9 @@ const Header = ({
 			</div>
 			<div className="absolute top-[20%] right-[6%] md:hidden z-20">
 				<BurgerButton
-					isOpen={open}
-					variant="burger"
 					ariaLabel="Main menu"
+					isOpen={open}
+					isWhiteStripes
 					onClick={() => setOpen(!open)}
 				/>
 			</div>

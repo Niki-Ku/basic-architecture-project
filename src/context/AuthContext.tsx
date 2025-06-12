@@ -1,4 +1,4 @@
-import { createContext, ReactNode, startTransition, useContext, useEffect, useState } from "react";
+import React, { createContext, ReactNode, startTransition, useContext, useEffect, useState } from "react";
 import { initFirebase } from "../helpers/firebaseUtils";
 import { User } from "firebase/auth";
 

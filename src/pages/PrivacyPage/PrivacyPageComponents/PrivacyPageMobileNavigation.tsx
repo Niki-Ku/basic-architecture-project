@@ -21,7 +21,6 @@ const PrivacyPageMobileNavigation: React.FC<ISidebarNavigation> = ({
 			<BurgerButton
 				onClick={handleBurgerButtonClick}
 				isOpen={isMobileSidebarOpen}
-				variant="burgerBlack"
 				background="transparentBlack"
 				ariaLabel={t("openSidebarButtonAriaLabel")}
 			></BurgerButton>
