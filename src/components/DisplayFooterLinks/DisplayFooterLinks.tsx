@@ -1,3 +1,4 @@
+import React from "react";
 import { t } from "i18next";
 import { Link } from "react-router-dom";
 import { footerLinks } from "../../config/routeConfig";
