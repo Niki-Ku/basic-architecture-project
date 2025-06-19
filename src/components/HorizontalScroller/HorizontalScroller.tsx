@@ -3,12 +3,12 @@ import "./HorizontalScroller.css";
 import { useRef } from "react";
 import { ReactComponent as ArrowShort } from "../../assets/icons/ArrowDownShort.svg";
 import { useTranslation } from "react-i18next";
-import HorizontalScrollerLink from "./HorizontalScrollerLink";
-import HorizontalScrollerMoviesDisplay from "./HorizontalScrollerMoviesDisplay";
+import HorizontalScrollerLink from "./HorizontalScrollerLink/HorizontalScrollerLink";
+import HorizontalScrollerMoviesDisplay from "./HorizontalScrollerMoviesDisplay/HorizontalScrollerMoviesDisplay";
 
 interface IHorizontalScroller {
 	films: Film[];
-	genres: Genre[];
+	genres?: Genre[];
 	link?: string;
 	heading: string;
 	user: DbUser | undefined;

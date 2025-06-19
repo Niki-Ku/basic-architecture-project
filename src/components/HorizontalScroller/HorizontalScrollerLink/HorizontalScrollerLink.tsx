@@ -1,5 +1,6 @@
+import React from "react";
 import { t } from "i18next";
-import { ReactComponent as Arrow } from "../../assets/icons/ArrowDownFull.svg";
+import { ReactComponent as Arrow } from "../../../assets/icons/ArrowDownFull.svg";
 import { Link } from "react-router-dom";
 
 const HorizontalScrollerLink = ({

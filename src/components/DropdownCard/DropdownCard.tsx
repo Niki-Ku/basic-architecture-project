@@ -1,3 +1,4 @@
+import React from "react";
 import Dropdown from "../Dropdown/Dropdown";
 import { icons } from "../../config/dynamicIcons";
 import { ICategory } from "../../types/global";
@@ -24,6 +25,7 @@ const DropdownCard: React.FC<IDropdownCard> = ({
 		<div className="rounded-lg px-3 pt-3 border border-gray-40 text-text-default overflow-hidden">
 			<div className="flex items-center pt-[6px] pb-4 border-b border-text-transparent-40">
 				<Icon
+					data-testid="dropdown-icon"
 					className="w-5 h-5 mr-4 ml-1"
 					style={{
 						fill: `${iconColor}`,
@@ -33,7 +35,7 @@ const DropdownCard: React.FC<IDropdownCard> = ({
 			</div>
 			{categories.map((category, index) => (
 				<Dropdown
-					key={category.categoryTitle}
+					key={`${category.categoryTitle}-${index}`}
 					links={category}
 					open={open}
 					id={`id-${title}-${index}`}

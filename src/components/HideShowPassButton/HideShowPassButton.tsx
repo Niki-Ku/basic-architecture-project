@@ -1,4 +1,4 @@
-import { SetStateAction } from "react";
+import React, { SetStateAction } from "react";
 import { ReactComponent as PasswordHide } from "../../assets/icons/passwordHide.svg";
 import { ReactComponent as PasswordShow } from "../../assets/icons/passwordShow.svg";
 import { t } from "i18next";
@@ -24,9 +24,9 @@ const HideShowPassButton = ({
 				className="hover:bg-gray-secondary p-1 rounded-full"
 			>
 				{passwordType === "password" ? (
-					<PasswordShow className="w-5 h-4 stroke-white" />
+					<PasswordShow className="w-5 h-4 stroke-white" data-testid="icon-show" />
 				) : (
-					<PasswordHide className="w-5 h-4 stroke-white" />
+					<PasswordHide className="w-5 h-4 stroke-white" data-testid="icon-hide" />
 				)}
 			</button>
 		</div>

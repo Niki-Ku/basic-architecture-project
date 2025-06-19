@@ -16,10 +16,12 @@ describe("<DisplayFooterLinks />", () => {
 
 	test("links work correctly", async () => {
 		window.scrollTo = jest.fn();
+		const scrollSpy = jest.spyOn(window, "scrollTo").mockImplementation(() => { });
 		render(<DisplayFooterLinks />);
 
 		const faqLink = screen.getByRole("link", { name: /faq/i });
 		await user.click(faqLink);
-		expect(window.scrollTo).toHaveBeenCalledWith({ top: 0 });
+		expect(scrollSpy).toHaveBeenCalledWith({ top: 0 });
+		scrollSpy.mockRestore();
 	});
 });

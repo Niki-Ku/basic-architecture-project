@@ -1,6 +1,6 @@
 import { LegacyRef } from "react";
-import { Film, DbUser, Genre } from "../../types/global";
-import FilmCard from "../FilmCard/FilmCard";
+import { Film, DbUser, Genre } from "../../../types/global";
+import FilmCard from "../../FilmCard/FilmCard";
 
 const HorizontalScrollerMoviesDisplay = ({
 	scrollContainerRef,
@@ -11,7 +11,7 @@ const HorizontalScrollerMoviesDisplay = ({
 	scrollContainerRef: LegacyRef<HTMLDivElement> | null;
 	films: Film[];
 	user: DbUser | undefined;
-	genres: Genre[];
+	genres?: Genre[];
 }) => {
 	return (
 		<div

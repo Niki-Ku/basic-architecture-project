@@ -1,3 +1,4 @@
+import React from "react";
 import { t } from "i18next";
 import NoImage from "../../assets/images/no-image.webp";
 
@@ -16,13 +17,13 @@ const FilmCardImage = ({
 					className="w-full h-full object-cover"
 					loading="eager"
 					src={`https://image.tmdb.org/t/p/w300${posterUrl}`}
-					alt={title + t("movie")}
+					alt={title + " " + t("movie")}
 				/>
 			) : (
 				<img
 					className="w-full h-full object-cover"
 					src={NoImage}
-					alt={title ? title + t("movie") : t("no_data")}
+					alt={title ? title + " " + t("movie") :  t("no_data")}
 				/>
 			)}
 		</div>

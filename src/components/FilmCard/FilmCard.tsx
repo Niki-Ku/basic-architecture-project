@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { DbUser, Film, Genre } from "../../types/global";
 import BookmarkButton from "../BookmarkButton/BookmarkButton";
@@ -11,7 +12,7 @@ export interface movieCardProps {
 	user?: DbUser;
 }
 
-const FilmCard: React.FC<movieCardProps> = ({
+const 	FilmCard: React.FC<movieCardProps> = ({
 	cardData,
 	genres,
 	link,
