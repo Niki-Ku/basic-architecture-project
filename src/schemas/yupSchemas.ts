@@ -12,7 +12,7 @@ export const registrationSchema = yup.object().shape({
 })
 
 export const signInSchema = yup.object().shape({
-  email: yup.string().email().required("required"),
-  password: yup.string().required("required"),
+  email: yup.string().email().required("email required"),
+  password: yup.string().required("password required"),
   rememberMe: yup.boolean()
 })

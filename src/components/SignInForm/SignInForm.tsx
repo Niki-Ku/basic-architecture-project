@@ -4,7 +4,7 @@ import {
 } from "firebase/auth";
 import { useFormik } from "formik";
 import { t } from "i18next";
-import { useState } from "react";
+import React, { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link, useNavigate } from "react-router-dom";
 import { signInSchema } from "../../schemas/yupSchemas";
@@ -115,9 +115,11 @@ const SignInForm = () => {
 					name="password"
 					className="w-full h-10 border px-4 rounded bg-transparent border-bg-hover"
 				/>
-				{passwordState.error && (
+				{(passwordState.error || (errors.password && touched.password)) && (
 					<span className="text-red-default font-light text-sm">
-						{t(passwordState.error)}
+						{passwordState.error
+							? t(passwordState.error)
+							: errors.password && t(errors.password)}
 					</span>
 				)}
 			</div>

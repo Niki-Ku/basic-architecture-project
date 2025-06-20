@@ -1,5 +1,5 @@
 import { t } from "i18next";
-import { SetStateAction, useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import { doPasswordReset } from "../../services/firebaseAuth";
 import Button from "../Button/Button";
 
