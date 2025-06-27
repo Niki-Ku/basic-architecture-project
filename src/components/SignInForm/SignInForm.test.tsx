@@ -110,7 +110,7 @@ describe("<SignInForm/>", () => {
 		expect(doSignInWithEmailAndPassword).toHaveBeenCalledTimes(1);
 	});
 
-	test("renders captcha after multiple failed attempts", async () => {
+  test("renders captcha after multiple failed attempts", async () => {    
 		(doSignInWithEmailAndPassword as jest.Mock).mockRejectedValue({
 			code: "auth/invalid-credential",
 		});
@@ -130,5 +130,5 @@ describe("<SignInForm/>", () => {
 
 		expect(screen.getByRole("presentation")).toBeInTheDocument();
 		expect(submitButton).toBeDisabled();
-	});
+  });
 });
