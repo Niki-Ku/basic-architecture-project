@@ -1,10 +1,10 @@
-import React from "react";
-import { render, screen } from "../../test-utils";
-import user from "@testing-library/user-event";
-import "@testing-library/jest-dom/extend-expect";
-import Header from "./Header";
-import { links, unauthorizedLinks } from "../../config/routeConfig";
-import { MockAuthProvider } from "../../context/MockAuthProvider";
+  import React from "react";
+  import { render, screen } from "../../test-utils";
+  import user from "@testing-library/user-event";
+  import "@testing-library/jest-dom/extend-expect";
+  import Header from "./Header";
+  import { links, unauthorizedLinks } from "../../config/routeConfig";
+  import { MockAuthProvider } from "../../context/MockAuthProvider";
 
 const mockNavigate = jest.fn();
 

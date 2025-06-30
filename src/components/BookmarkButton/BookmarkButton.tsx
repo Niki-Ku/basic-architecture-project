@@ -61,7 +61,7 @@ const BookmarkButton = ({
 						w-7 h-7 absolute top-5 right-2 bg-gray-static rounded-full justify-center items-center z-10 flex group-hover:flex
 						${isMobile ? "" : "hidden"}
 					`}
-			aria-label={t("")}
+			aria-label={t("add-to-list")}
 		>
 			<BookmarkIcon
 				className={`w-5 h-5`}

@@ -1,3 +1,4 @@
+import React from "react";
 import { Genre } from "../../types/global";
 
 const FilmCardGenresDisplay = ({
