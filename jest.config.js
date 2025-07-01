@@ -6,6 +6,6 @@ module.exports = {
 	moduleNameMapper: {
 		"\\.svg$": "<rootDir>/__mocks__/svgMock.tsx",
 		"\\.(webp|png|jpg|jpeg)$": "<rootDir>/__mocks__/imgMock.js",
-		"\\.(css|less|scss|sass)$": "jest-transform-stub",
+		"\\.(css|less|scss|sass)$": "identity-obj-proxy",
 	},
 };

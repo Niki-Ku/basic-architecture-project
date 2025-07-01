@@ -21,7 +21,7 @@ const 	FilmCard: React.FC<movieCardProps> = ({
 	return (
 		<div className="group snap-start relative w-[230px]">
 			{user && <BookmarkButton user={user} cardData={cardData} />}
-			<Link onClick={() => window.scrollTo({ top: 0 })} to={link}>
+			<Link onClick={() => window.scrollTo({ top: 0 })} to={link}> 
 				<FilmCardImage
 					posterUrl={cardData.poster_path}
 					title={cardData.title}

@@ -33,6 +33,10 @@ const LocationDisplay = () => {
 	return <div data-testid="location">{location.pathname}</div>;
 };
 
+beforeAll(() => {
+  window.scrollTo = jest.fn();
+});
+
 describe("<FilmCard />", () => {
 	test("Renders correctly with required props only", () => {
 		render(<FilmCard cardData={cardDataTestObj} link="some-movie" />);

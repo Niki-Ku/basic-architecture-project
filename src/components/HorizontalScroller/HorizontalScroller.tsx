@@ -1,6 +1,6 @@
 import { DbUser, Film, Genre } from "../../types/global";
 import "./HorizontalScroller.css";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { ReactComponent as ArrowShort } from "../../assets/icons/ArrowDownShort.svg";
 import { useTranslation } from "react-i18next";
 import HorizontalScrollerLink from "./HorizontalScrollerLink/HorizontalScrollerLink";
@@ -37,6 +37,7 @@ const HorizontalScroller: React.FC<IHorizontalScroller> = ({
 		<section className="group/scroll md:px-10 relative">
 			<HorizontalScrollerLink heading={heading} link={link} />
 			<button
+				// data-testid="scroll-button-left"
 				onClick={() => scroll("left")}
 				className="md:group-hover/scroll:block hidden absolute h-full w-10 top-0 left-0"
 				aria-label={t("slide-left")}
@@ -50,6 +51,7 @@ const HorizontalScroller: React.FC<IHorizontalScroller> = ({
 				scrollContainerRef={scrollContainerRef}
 			/>
 			<button
+				// data-testid="scroll-button-right"
 				onClick={() => scroll("right")}
 				className="hidden md:group-hover/scroll:block absolute h-full w-10 top-0 right-0"
 				aria-label={t("slide-right")}
