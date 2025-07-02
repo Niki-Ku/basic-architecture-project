@@ -1,10 +1,10 @@
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as SearchIcon } from "../../assets/icons/SearchIcon.svg";
 import useDebounce from "../../hooks/useDebounce";
 import { Links } from "../../types/global";
 import "./SearchBar.css";
 import { useTranslation } from "react-i18next";
-import { useState, useRef } from "react";
 
 interface SearchBarProps {
 	links: Links[];
@@ -22,10 +22,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
 	placeholder,
 }) => {
 	const { t } = useTranslation();
+	const debouncedQuery = useDebounce(query);
 	const filteredItems = links.filter((item) =>
-		item.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+		item.name.toLocaleLowerCase().includes(debouncedQuery.toLocaleLowerCase())
 	);
-	const debouncedFilteredItems = useDebounce(filteredItems);
 	const [isFocused, setIsFocused] = useState(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -55,44 +55,51 @@ const SearchBar: React.FC<SearchBarProps> = ({
 					<input
 						onChange={(e) => onQueryChange(e.target.value)}
 						onFocus={() => setIsFocused(true)}
+						onBlur={() => setTimeout(() => setIsFocused(false), 500)}
 						ref={inputRef}
 						type="search"
 						value={query}
 						placeholder={
 							placeholder ? t(placeholder) : t("typeQuestionTopicOrIssue")
 						}
-						className="w-full bg-bg-primary text-text-default placeholder:text-text-secondary text-base pl-[52px] appearance-none pr-4 py-[9px] focus:outline-none"
+						className="w-full bg-bg-primary text-text-default placeholder:text-text-secondary 
+						text-base pl-[52px] appearance-none pr-4 py-[9px] focus:outline-none"
 					/>
 					<SearchIcon className="w-6 h-6 fill-text-default absolute top-[9px] left-3.5 pointer-events-none" />
 				</form>
-				<div className="absolute left-0 w-full block rounded-br rounded-bl bg-gradient-to-r from-[#e50914] from-[-0.08%] via-[#c94ff5] via-[81%] to-[#5b79f1] to-[99.92%]">
-					<div className="bg-bg-primary mt-0 m-[2px] rounded-br rounded-bl">
-						<ul
-							className={`${
-								filteredItems.length > 0 &&
-								query.length > 0 &&
-								"flex flex-col gap-2 p-1 border-t border-black-10"
-							}`}
-						>
-							{isFocused &&
-								query.length > 0 &&
-								debouncedFilteredItems.slice(0, 5).map((link, index) => (
+				{isFocused && query.length > 0 && (
+					<div
+						className="absolute left-0 w-full block 
+						rounded-br rounded-bl bg-gradient-to-r from-[#e50914]
+						from-[-0.08%] via-[#c94ff5] via-[81%] to-[#5b79f1] to-[99.92%]"
+					>
+						<div className="bg-bg-primary mt-0 m-[2px] rounded-br rounded-bl">
+							<ul
+								className={`${
+									filteredItems.length > 0 &&
+									query.length > 0 &&
+									"flex flex-col gap-2 p-1 border-t border-black-10"
+								}`}
+							>
+								{filteredItems.slice(0, 5).map((link, index) => (
 									<li
+										className="bg-bg-primary text-text-default mx-4 hover:bg-bg-secondary
+										cursor-pointer border-b border-text-transparent-10 last:border-0"
 										key={`seach-item-${link.name}-${index}`}
-										className="bg-bg-primary text-text-default mx-4 hover:bg-bg-secondary cursor-pointer border-b border-text-transparent-10 last:border-0 py-[9px]"
 									>
 										<Link
+											className="text-base w-full h-full block z-10 py-[9px]"
 											onClick={() => window.scrollTo({ top: 0 })}
 											to={link.path}
-											className="text-base w-full h-full block z-10"
 										>
 											{t(link.name)}
 										</Link>
 									</li>
 								))}
-						</ul>
+							</ul>
+						</div>
 					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	);
