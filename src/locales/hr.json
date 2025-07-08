@@ -202,6 +202,7 @@
   "yourWatchlist": "Vaša lista za gledanje",
   "searchMovies": "Pretraži Filmove",
   "loadMore": "Učitaj Više",
-  "systemStatus": "Status Sustava"
+  "systemStatus": "Status Sustava",
+  "no_data": "Nema podataka"
 
 }

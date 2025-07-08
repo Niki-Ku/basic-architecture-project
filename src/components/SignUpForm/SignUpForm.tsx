@@ -1,5 +1,5 @@
+import React, { useState } from "react";
 import { useFormik } from "formik";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { addToDb } from "../../helpers/firebaseUtils";
@@ -7,7 +7,6 @@ import { registrationSchema } from "../../schemas/yupSchemas";
 import { doCreateUserWithEmailAndPassword } from "../../services/firebaseAuth";
 import Button from "../Button/Button";
 import { IRegistration } from "../../types/global";
-
 import TermsServiceAgreeLink from "../TermsServiceAgreeLink/TermsServiceAgreeLink";
 import HideShowPassButton from "../HideShowPassButton/HideShowPassButton";
 
@@ -26,11 +25,12 @@ const SignUpForm = () => {
 				values.password
 			);
 			await addToDb(user, values.name);
-			setLoading(false);
 			navigate("/");
 		} catch (error: any) {
 			console.log(error);
 			setFirebaseError(error?.code);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -64,7 +64,11 @@ const SignUpForm = () => {
 		);
 
 	return (
-		<form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-5">
+		<form
+			aria-label="sign-up-form"
+			onSubmit={handleSubmit}
+			className="flex flex-col gap-3 mt-5"
+		>
 			<div>
 				<input
 					type="text"

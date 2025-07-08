@@ -202,7 +202,8 @@
   "yourWatchlist": "Tu lista de seguimiento",
   "searchMovies": "Buscar Películas",
   "loadMore": "Cargar Más",
-  "systemStatus": "Estado del Sistema"
+  "systemStatus": "Estado del Sistema",
+  "no_data": "Sin datos"
   
 }
 

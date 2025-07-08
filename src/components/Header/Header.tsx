@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 import NetflixLogo from "../../assets/images/netflix-logo.webp";
 import { links, unauthorizedLinks } from "../../config/routeConfig";
 import ToggleButton from "../ToggleButton/ToggleButton";
@@ -20,6 +20,7 @@ const Header = ({
 	const { t } = useTranslation();
 	const { userLoggedIn } = useAuth();
 	const navigate = useNavigate();
+	const [open, setOpen] = useState(false);
 
 	const showLinks = userLoggedIn ? links : unauthorizedLinks;
 
@@ -34,7 +35,6 @@ const Header = ({
 			: "text-lg font-semibold text-white hover:text-orange-500";
 	};
 
-	const [open, setOpen] = useState(false);
 	const bodyClass = document.body.classList;
 	open ? bodyClass.add("overflow-hidden") : bodyClass.remove("overflow-hidden");
 
@@ -53,9 +53,9 @@ const Header = ({
 			</div>
 			<div className="absolute top-[20%] right-[6%] md:hidden z-20">
 				<BurgerButton
-					isOpen={open}
-					variant="burger"
 					ariaLabel="Main menu"
+					isOpen={open}
+					isWhiteStripes
 					onClick={() => setOpen(!open)}
 				/>
 			</div>

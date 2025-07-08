@@ -7,7 +7,6 @@ interface ButtonProps {
     variant?: 'primary' | 'secondary' | 'white';
     type?: 'button' | 'submit' | 'reset';
     icon?: keyof typeof buttonIcons;
-    iconVariant?: 'black' | 'white';
     disabled?: boolean;
     wide?: boolean;
 }
@@ -16,7 +15,6 @@ const Button: React.FC<ButtonProps> = ({
     label, 
     onClick, 
     variant = 'primary',
-    iconVariant = 'black',
     type = 'button',
     icon,
     disabled,
@@ -27,10 +25,6 @@ const Button: React.FC<ButtonProps> = ({
         secondary: `${wide && 'w-full'} bg-gray-secondary hover:bg-bg-hover text-text-default py-2 px-4 rounded inline-flex justify-center items-center gap-2`,
         white: `${wide && 'w-full'} bg-white hover:bg-bg-hover text-black-default py-2 px-4 rounded inline-flex justify-center items-center gap-2`,
     };
-    const iconStyles = {
-        black: 'w-5 h-5 fill-text-default inline-block',
-        white: 'w-5 h-5 fill-text-default inline-block',
-    }
     const styles = {
         backgroundColor: disabled ? '#d1d5db' : '',
         color: disabled ? '#222222' : '',
@@ -45,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
             disabled={disabled}
             style={styles}
         >   
-            {icon && Icon && <Icon className={iconStyles[iconVariant]} />}
+            {icon && Icon && <Icon data-testid="button-icon" className='w-5 h-5 fill-text-default inline-block' />}
             {label}
         </button>
     );

@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
 import React from "react";
-import { ReactComponent as ArticleIcon } from "../../assets/icons/ArticleIcon.svg";
 import { ReactComponent as ArrowDownShort } from "../../assets/icons/ArrowDownShort.svg";
 import { useTranslation } from "react-i18next";
 import { ICategory } from "../../types/global";
+import DropdownItems from "../DropdownItems/DropdownItems";
 
 interface IDropdown {
 	links: ICategory;
@@ -22,6 +21,7 @@ const Dropdown: React.FC<IDropdown> = ({
 	return (
 		<div className="bg-bg-default text-text-default w-full border-b border-text-transparent-40 last:border-none">
 			<details
+				data-testid="dropdown-details"
 				id={`id-${links.categoryTitle}`}
 				onClick={(e) => handleDropdownClick(id, e)}
 				open={open === id}
@@ -34,23 +34,7 @@ const Dropdown: React.FC<IDropdown> = ({
 						} duration-100`}
 					/>
 				</summary>
-				<ul className="pt-4 pb-1">
-					{links.subCategories.map((subCategory) => (
-						<li
-							key={subCategory.subCategoryName}
-							className="flex flex-nowrap mb-4"
-						>
-							<ArticleIcon className="w-[16px] h-[16px] fill-text-default mr-2 mt-1" />
-							<Link
-								onClick={() => window.scrollTo({ top: 0 })}
-								to={subCategory.subCategoryPath}
-								className="underline hover:text-text-accent"
-							>
-								<span className="text-wrap break-normal">{t(subCategory.subCategoryName)}</span>
-							</Link>
-						</li>
-					))}
-				</ul>
+				<DropdownItems links={links} />
 			</details>
 		</div>
 	);

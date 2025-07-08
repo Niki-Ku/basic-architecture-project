@@ -1,4 +1,3 @@
-// src/components/ErrorBoundary.tsx
 import React, { Component, ReactNode } from "react";
 
 type Props = {
@@ -16,12 +15,10 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   static getDerivedStateFromError(error: Error) {
-    // Update state so the next render shows fallback UI.
     return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // You can log this to an error reporting service
     console.error("❗️Error caught by ErrorBoundary:", error, errorInfo);
   }
 

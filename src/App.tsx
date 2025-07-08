@@ -148,7 +148,7 @@ function App() {
 						}
 					/>
 					<Route
-						path="/termsofuse"
+						path="/terms"
 						element={
 							<Suspense fallback={<div className="h-[200svh]">Loading terms...</div>}>
 								<TermsOfUsePage />

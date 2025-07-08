@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import DisplayLanguages from "./DisplayLanguages";
+import DisplayLanguages from "./DisplayLanguages/DisplayLanguages";
 
 const LanguageSwitcher = () => {
 	const { t, i18n } = useTranslation();
@@ -12,6 +12,7 @@ const LanguageSwitcher = () => {
 			try {
 				await i18n.changeLanguage(newLanguage);
 				setLanguage(newLanguage);
+				setIsOpen((open) => !open);
 			} catch (error) {
 				throw new Error("Error changing language");
 			}
@@ -20,18 +21,21 @@ const LanguageSwitcher = () => {
 	);
 
 	const handleLanguageChange = useCallback(
-		(newLanguage: string) => {
-			changeLanguage(newLanguage).catch(() => {
-				throw new Error("Error changing language");
+		async (newLanguage: string) => {
+			return changeLanguage(newLanguage).catch(() => {
+				throw new Error("Language switch failed");
 			});
 		},
 		[changeLanguage]
 	);
 
 	const handleLanguageClick = useCallback(
-		(language: string) => {
-			handleLanguageChange(language);
-			setIsOpen((open) => !open);
+		async (language: string) => {
+			try {
+				await handleLanguageChange(language);
+			} catch (error) {
+				console.log("Error changing language");
+			}
 		},
 		[handleLanguageChange]
 	);

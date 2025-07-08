@@ -1,4 +1,4 @@
-import { createContext, ReactNode, startTransition, useContext, useEffect, useState } from "react";
+import React, { createContext, ReactNode, startTransition, useContext, useEffect, useState } from "react";
 import { initFirebase } from "../helpers/firebaseUtils";
 import { User } from "firebase/auth";
 
@@ -8,7 +8,7 @@ interface IAuthContextType {
   loading: boolean;
 }
 
-const AuthContext = createContext<IAuthContextType | undefined>(undefined);
+export const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 
 export const useAuth = (): IAuthContextType => {
   const context = useContext(AuthContext);

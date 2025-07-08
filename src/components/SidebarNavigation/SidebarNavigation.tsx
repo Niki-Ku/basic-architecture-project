@@ -4,7 +4,7 @@ import { sidebarDropdownLinks } from "../../config/routeConfig";
 export interface ISidebarNavigation {
   activeTopic: string;
   allSections: HTMLDivElement[];
-  setActiveTopic: Function;
+  setActiveTopic: React.Dispatch<React.SetStateAction<string>>;
   openSection?: string;
 }
 
